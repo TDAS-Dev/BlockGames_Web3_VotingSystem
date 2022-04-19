@@ -1,18 +1,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-    .btn-hire {
-        @apply mx-3 bg-green-500 text-green-200 px-5 py-1 cursor-pointer
-        hover:bg-green-400 rounded-full hover:text-green-100
-    }
-    .nav-link {
-        @apply text-gray-300 hover:text-gray-500 lg:mx-5 md:mx-2 sm:mx-1
-        
-    }
-    .btn-rounded {
-        @apply rounded-full py-2 px-5 uppercase text-sm
-        focus:outline-none focus:ring-offset-2
-    }
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
