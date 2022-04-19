@@ -2315,6 +2315,14 @@ Ensure the default browser behavior of the `hidden` attribute.
     }
   }
 
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:flex-col {
+    flex-direction: column;
+  }
+
   .sm\:underline {
     -webkit-text-decoration-line: underline;
             text-decoration-line: underline;
@@ -2372,5 +2380,3 @@ Ensure the default browser behavior of the `hidden` attribute.
     }
   }
 }
-
-
