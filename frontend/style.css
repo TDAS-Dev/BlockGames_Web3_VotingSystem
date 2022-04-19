@@ -2367,6 +2367,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-bottom: 18rem;
   }
 
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
   .lg\:text-6xl {
     font-size: 3.75rem;
     line-height: 1;
