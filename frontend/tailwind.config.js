@@ -1,11 +1,15 @@
 module.exports = {
   content: ["./**/*.{html,js}", "./html_files/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backgrounImage: {
+        hero: "url('./src/img/bg.jpg')",
+      },
+    },
     fontFamily: {
-      sans: ['Roboto', 'sans-serif'],
-      heading: ['Poppins', 'sans-serif']
-    }
+      sans: ["Montserrat", "sans-serif"],
+      heading: ["Montserrat", "sans-serif"],
+    },
   },
   plugins: [],
 };
