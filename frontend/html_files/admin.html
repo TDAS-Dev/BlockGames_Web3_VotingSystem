@@ -71,10 +71,11 @@
             <div id="form1">
               <h3 class="text-2xl font-sans">Create Candidate Profile</h3>
               <p class="text-sm font-thin">Restricted to Chairman, Board of Directors and Teachers.</p>
-              <form action="#candidateForm" class="w-4/5">
+              <form action="#candidateForm" class="w-4/5" id="form-addCandidates">
                 <div class="my-5">
                   <input type="text" class="rounded-full w-full px-4 py-2 block w-100 bg-zinc-800"
-                    placeholder="FirstName">
+                    placeholder="FirstName"
+                    id="input-firstname">
                 </div>
                 <div class="my-5">
                   <input type="text" class="rounded-full w-full px-4 py-2 block w-100 bg-zinc-800"
@@ -94,6 +95,7 @@
                 </div>
                 <div class="my-14">
                   <button for="addFile"
+                    id="btn-addCandidate"
                     class="block rounded-full w-full text-center hover:bg-red-500 border-red-400 px-8 py-2 bg-red-600">
                     Add Candidate
                   </button>
