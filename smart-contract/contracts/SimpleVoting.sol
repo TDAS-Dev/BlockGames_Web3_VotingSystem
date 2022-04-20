@@ -8,7 +8,7 @@ contract SimpleVoting {
 
     //STAKEHOLDER VARIABLES
     mapping (address => Stakeholder) public stakeholders; //hold list of all stakeholders registered
-    Stakeholder [] public stakeholdersList; //hold list of all stakeholders registered
+    address [] public stakeholdersList; //hold list of all stakeholders registered
 
     address [] public BODList; //holds list of all board of directors registered by the Chairman
     address [] public teachersList; //holds list of all teachers registered by the Chairman
@@ -19,7 +19,7 @@ contract SimpleVoting {
     struct Stakeholder { 
         Role role;
         bool voted;  // if true, that person already voted
-        uint8 candidateChosen; // index of the candidate voted for
+        uint256 candidateChosen; // index of the candidate voted for
         address registeredAddress; //address that registered stakeholder
     } // struct of the details for each stakeholder
 
@@ -40,7 +40,15 @@ contract SimpleVoting {
     modifier onlyByChairman() {
       require(msg.sender == chairman, "Only Chairman can do this.");
       _;
-   }
+    }
+
+    function isAStakeholder(address _address) public view returns (bool){
+        for ( uint8 i = 0; i < stakeholdersList.length; i++){
+            if (_address == stakeholdersList[i]) {
+                return true;
+            } 
+        } return false;
+    }
 
     function createStakeHolder (address _address, Role _role) public onlyByChairman {
         stakeholders[_address] = Stakeholder(_role, false, 8, msg.sender);
@@ -87,6 +95,30 @@ contract SimpleVoting {
         } else {
             votingActive = true;
         }
+    }
+
+    function vote( uint256 _candidateID) public onlyStakeHolders {
+        stakeholders[msg.sender].voted = true;
+        stakeholders[msg.sender].candidateChosen = _candidateID;
+
+        Candidate memory chosenCandidate = candidatesList[_candidateID];
+        chosenCandidate.votesReceived++;
+        /*
+        if (stakeholders[msg.sender].role == Role(0)){
+            chosenCandidate.votesReceivedBOD++;
+        }
+        if (stakeholders[msg.sender].role == Role(1)){
+            chosenCandidate.votesReceivedTeachers++;
+        }
+        if (stakeholders[msg.sender].role == Role(2)){
+            chosenCandidate.votesReceivedStudents++;
+        }
+        */
+    }
+
+    modifier onlyStakeHolders (){
+        require (isAStakeholder(msg.sender), "Is not registered to vote");
+        _;
     }
 
 
