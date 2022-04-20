@@ -30,7 +30,7 @@ contract SimpleVoting {
     Candidate[] public candidatesList; //holds list of all candidates registered by the Chairman
     struct Candidate {
         uint256 candidateID;
-        bytes candidateName;
+        string candidateName;
         uint8 votesReceived;
         address registeredAddress; //address that registered candidate
         /*
@@ -81,10 +81,14 @@ contract SimpleVoting {
         } else {
             candidateID = candidatesList.length;
         }
-        bytes memory candidateName = toBytes(_candidateName);
+        // bytes memory candidateName = toBytes(_candidateName);
         candidatesList.push(
-            Candidate(candidateID, candidateName, 0, msg.sender)
+            Candidate(candidateID, _candidateName, 0, msg.sender)
         );
+    }
+
+    function getListOfCandidates() public view returns (Candidate[] memory) {
+        return candidatesList;
     }
 
     constructor() {
