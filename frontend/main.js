@@ -11,6 +11,8 @@ async function login() {
         .then(function (user) {
             console.log("logged in user:", user);
             console.log(user.get("ethAddress"));
+            setState("account", user.get("ethAddress"))
+            document.getElementById("walletAddressButton").innerHTML = user.get("ethAddress")
         })
         .catch(function (error) {
             console.log(error);
@@ -19,9 +21,30 @@ async function login() {
 }
   
 async function logOut() {
+    removeAddressFromStorage("account")
     await Moralis.User.logOut();
     console.log("logged out");
 }
 
 document.getElementById("btn-login").onclick = login;
-logOut()
+document.getElementById("btn-logout").onclick = logOut;
+
+
+//LOCAL STORAGE TRYOUT
+
+function setState(key, params) {
+    let stateData = localStorage.setItem(key, JSON.stringify(params))
+    getStateData(key)
+}
+
+function getStateData(params){
+    let getData = localStorage.getItem(params)
+    return JSON.parse(getData)
+}
+
+function removeAddressFromStorage(param) {
+    localStorage.removeItem(param)
+    document.getElementById("walletAddressButton").innerHTML = "connect to metamask"
+}
+
+document.getElementById("walletAddressButton").innerHTML = getStateData("account")
