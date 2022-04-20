@@ -8,7 +8,8 @@ module.exports = {
     },
     fontFamily: {
       sans: ["Montserrat", "sans-serif"],
-      heading: ["Montserrat", "sans-serif"],
+      heading: ["Poppins", "sans-serif"],
+      robo: ["Roboto", "sans-serif"],
     },
   },
   plugins: [],
