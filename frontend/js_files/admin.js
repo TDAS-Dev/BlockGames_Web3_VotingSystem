@@ -23,7 +23,6 @@ async function logOut() {
     console.log("logged out");
 }
 
-
 async function displayWalletAddress() {
     const walletAddress = document.getElementById("wallet-address")
     let user = Moralis.User.current();
