@@ -54,12 +54,12 @@
             <div class="mx-3 mt-6">Teachers: 3</div>
             <div class="flex justify-between">
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400"></div>
-                <div>Voting Inactive</div>
+                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="voting-status"></div>
+                <div id="votingStatusText">Voting Inactive</div>
               </div>
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400"></div>
-                <div>Result Inactive</div>
+                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="result-status"></div>
+                <div id="resultStatusText">Result Inactive</div>
               </div>
             </div>
           </div>
@@ -116,9 +116,11 @@
                   <div class="w-3/4 my-5">
                     <div class="grid grid-cols-2 gap-4">
                       <button type="button"
+                        id="btn-voting-open"
                         class="rounded-full w-full px-4 py-2 block w-100 bg-green-600 hover:bg-green-500 border-green-400">Open
                         Voting</button>
                       <button type="button"
+                        id="btn-voting-close"
                         class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400">Close
                         Voting</button>
                     </div>
@@ -136,10 +138,10 @@
                     <div class="w-3/4 my-5">
                       <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-2 sm:grid-cols-1 gap-4">
                         <button type="button"
-                          class="rounded-full w-full px-4 py-2 block w-100 bg-green-600 hover:bg-green-500 border-green-400">Open
+                          class="rounded-full w-full px-4 py-2 block w-100 bg-green-600 hover:bg-green-500 border-green-400" id="btn-result-open">Open
                           Result</button>
                         <button type="button"
-                          class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400">Close
+                          class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400" id="btn-result-close">Close
                           Result</button>
                       </div>
                     </div>
