@@ -58,7 +58,7 @@
         </section>
 
         <section class="w-4/5 mx-auto">
-          <div class="grid grid-cols-2 my-32 gap-8 text-white">
+          <div class="grid grid-cols-2 items-center my-32 gap-8 text-white">
             <!-- form 1 -->
             <div id="form1">
               <h3 class="text-2xl font-sans">Create Candidate Profile</h3>
@@ -91,7 +91,10 @@
                   </button>
                 </div>
               </form>
+              
             </div>
+
+
             <!-- form 2 -->
             <div id="form2">
               <div class="w-4/5 ml-14">
@@ -114,7 +117,7 @@
                   </div>
                 </form>
 
-                <div class=" mt-14">
+                <div class=" mt-7">
                   <h3 class="text-2xl font-sans">Open/Close Results Portal</h3>
                   <p class="text-sm font-thin">Restricted to Chairman</p>
                   <form action="#candidateForm">
@@ -130,6 +133,24 @@
                         <button type="button"
                           class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400">Close
                           Result</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class=" mt-7">
+                  <h3 class="text-2xl font-sans">Vote</h3>
+                  <!-- <p class="text-sm font-thin">Restricted to Chairman</p> -->
+                  <form action="#candidateForm">
+                    <div class="my-8">
+                      <input type="text" class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
+                        placeholder="Input your secret Code">
+                    </div>
+                    <div class="my-5">
+                      <div class="flex justify-center items-center">
+                        <button type="button"
+                          class="rounded-full px-14 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400">
+                          Vote</button>
                       </div>
                     </div>
                   </form>
