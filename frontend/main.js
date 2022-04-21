@@ -50,4 +50,12 @@ function removeAddressFromStorage(param) {
 if (getStateData("account")) {
     document.getElementById("walletAddressButton").innerHTML = getStateData("account")
 }
-// document.getElementById("walletAddressButton").innerHTML = getStateData("account")
+document.getElementById("modal").onload = setModal
+
+function setModal() {
+    if (getStateData("account")) {
+        document.getElementById('modal').classList.replace('hidden', 'grid')
+        document.getElementById('modal-header').innerHTML = 'Success'
+        document.getElementById("modal-body").innerHTML = "Your Connection to metamask was successful"
+    }
+}

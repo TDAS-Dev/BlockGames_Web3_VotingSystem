@@ -21,12 +21,12 @@
 
   <body class="bg-zinc-900 font-heading relative">
     <!-- modal div -->
-    <div id="modal" class="hidden place-items-center mx-auto container absolute z-auto w-100 h-100">
-      <div class="bg-zinc-100 rounded shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
+    <div id="modal" class="grid transition-all place-items-center mx-auto container absolute z-auto w-100 h-100">
+      <div class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
         <div id="modal-content" class="">
           <div id="modal-header" class="flex justify-between items-center py-2">
-            <h2 class="modal-title">Modal title</h2>
-            <span id="close" class="text-red-600 hover:text-red-500 cursor-pointer" style="font-size: 30px;">&times;</span>
+            <h2 id="modal-title">Modal title</h2>
+            <span id="close" class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
           </div>
           <div class="border border-zinc-200 shadow-sm"></div>
           <div id="modal-body" class="px-3 py-10">
