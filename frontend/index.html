@@ -20,7 +20,31 @@
   <!-- url('https://images.unsplash.com/photo-1472803828399-39d4ac53c6e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1553&q=80') -->
 
   <body style="background-image: url('https://images.unsplash.com/photo-1472803828399-39d4ac53c6e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1553&q=80')"
-    class="font-heading max-h-fit w-full py-8 max-h-100 h-full object-cover bg-no-repeat bg-cover bg-center">
+    class="relative font-heading max-h-fit w-full py-8 max-h-100 h-full object-cover bg-no-repeat bg-cover bg-center">
+     <!-- modal div -->
+     <div id="modal" class="hidden transition-all place-items-center mx-auto container absolute z-auto w-100 h-100">
+      <div class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
+        <div id="modal-content" class="">
+          <div id="modal-header" class="flex justify-between items-center py-2">
+            <h2 id="modal-title">Modal title</h2>
+            <span id="close" class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-body" class="px-3 py-10">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-footer" class="flex justify-center items-center pt-3">
+            <button href="#close" id="closeBtn" style="font-size: 12px;"
+              class="font-sans text-sm font md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full cursor-pointer">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
     <div class="container h-100 mx-auto">
       <header class="lg:mx-8 md:mx-2 mt-5">
         <div class="flex lg:flex-row sm:flex-col : justify-between items-center">
@@ -34,10 +58,16 @@
               <a href="./html_files/admin.html" class="lg:mx-10 hover:text-red-500 mx-5 underline block">Admin</a>
               <a href="./html_files/vote.html" class="lg:mx-10 hover:text-red-500 mx-5 underline block">Vote</a>
               <a href="./html_files/result.html" class="lg:mx-10 hover:text-red-500 mx-5 underline block">Result</a>
+              <span
+              style="font-size: 12px;"
+              id="walletAddressButton"
+                class="font-sans text-sm font md:mx-3 py-2 px-5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full cursor-pointer">
+                connect metamask
+              </span>
             </ul>
-            <button
+            <!-- <button
               class="lg:mx-5 md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full" id="walletAddressButton">connect to metamask</button>
-          </div>
+          </div> -->
         </div>
       </header>
 
