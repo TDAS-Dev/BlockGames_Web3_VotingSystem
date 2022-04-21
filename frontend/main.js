@@ -47,4 +47,7 @@ function removeAddressFromStorage(param) {
     document.getElementById("walletAddressButton").innerHTML = "connect to metamask"
 }
 
-document.getElementById("walletAddressButton").innerHTML = getStateData("account")
+if (getStateData("account")) {
+    document.getElementById("walletAddressButton").innerHTML = getStateData("account")
+}
+// document.getElementById("walletAddressButton").innerHTML = getStateData("account")
