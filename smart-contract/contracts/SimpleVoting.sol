@@ -91,6 +91,19 @@ contract SimpleVoting {
         return candidatesList;
     }
 
+    function getListOfTeachers() public view returns (address[] memory) {
+        return teacherList;
+    }
+
+    function getListOfStudents() public view returns (address[] memory) {
+        return studentList;
+    }
+
+
+    function getListOfBOD() public view returns (address[] memory) {
+        return BODList;
+    }
+
     constructor() {
         chairman = msg.sender;
         votingActive = false;
