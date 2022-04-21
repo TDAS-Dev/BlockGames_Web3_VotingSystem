@@ -3,10 +3,11 @@
 pragma solidity ^0.8.0;
 
 contract SimpleVoting {
-    //state variables
+    /****************************************
+    STATE VARIABLES
+    *****************************************/
     address public chairman; //address of chairman
 
-    //STAKEHOLDER VARIABLES
     mapping(address => Stakeholder) public stakeholders; //hold list of all stakeholders registered
     address[] public stakeholdersList; //hold list of all stakeholders registered
 
@@ -17,49 +18,47 @@ contract SimpleVoting {
     enum Role {
         BOD,
         TEACHER,
-        STUDENT
+        STUDENT,
+        CHAIRMAN
     } //enum to rep the possible roles an address can take
 
     struct Stakeholder {
         Role role;
-        bool voted; // if true, that person already voted
+        bool hasVoted; // if true, that person already voted
         uint256 candidateChosen; // index of the candidate voted for
         address registeredAddress; //address that registered stakeholder
     } // struct of the details for each stakeholder
 
     Candidate[] public candidatesList; //holds list of all candidates registered by the Chairman
+
     struct Candidate {
         uint256 candidateID;
         string candidateName;
-        uint8 votesReceived;
         address registeredAddress; //address that registered candidate
-        /*
-        uint8 votesReceivedBOD
-        uint8 votesReceivedTeachers
-        uint8 votesReceivedStudents
-        */
+        uint8 totalVotesReceived;
+        uint8 votesReceivedBOD;
+        uint8 votesReceivedTeachers;
+        uint8 votesReceivedStudents;
+        bool receivedChairmansVote;
     } // struct of the details for each Cabdidates
 
-    //Modifier
-    modifier onlyByChairman() {
-        require(msg.sender == chairman, "Only Chairman can do this.");
-        _;
+    bool public votingActive;
+
+    bool public resultsActive;
+
+    constructor() {
+        chairman = msg.sender;
+        votingActive = false;
+        resultsActive = false;
+        createStakeHolder(msg.sender, 3); //add the chairperson as a stakeholder
     }
 
-    function isAStakeholder(address _address) public view returns (bool) {
-        for (uint8 i = 0; i < stakeholdersList.length; i++) {
-            if (_address == stakeholdersList[i]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function createStakeHolder(address _address, Role _role)
+    function createStakeHolder(address _address, uint256 _role)
         public
         onlyByChairman
     {
-        stakeholders[_address] = Stakeholder(_role, false, 8, msg.sender);
+        stakeholders[_address] = Stakeholder(Role(_role), false, 8, msg.sender); //add stakeholders to the mapping
+        stakeholdersList.push(_address); // add stakeholder's adress to the list of stakeHolders addresses
         if (stakeholders[_address].role == Role(0)) {
             BODList.push(_address);
         }
@@ -69,6 +68,15 @@ contract SimpleVoting {
         if (stakeholders[_address].role == Role(2)) {
             studentList.push(_address);
         }
+    }
+
+    function isAStakeholder(address _address) public view returns (bool) {
+        for (uint8 i = 0; i < stakeholdersList.length; i++) {
+            if (_address == stakeholdersList[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     function createCandidate(string memory _candidateName)
@@ -83,7 +91,7 @@ contract SimpleVoting {
         }
         // bytes memory candidateName = toBytes(_candidateName);
         candidatesList.push(
-            Candidate(candidateID, _candidateName, 0, msg.sender)
+            Candidate(candidateID, _candidateName, msg.sender, 0, 0, 0, 0, false)
         );
     }
 
@@ -91,21 +99,30 @@ contract SimpleVoting {
         return candidatesList;
     }
 
-    constructor() {
-        chairman = msg.sender;
-        votingActive = false;
-        resultsActive = false;
+    function getListOfStakeHolders() public view returns (address[] memory) {
+        return stakeholdersList;
+    }
+
+    function getListOfTeachers() public view returns (address[] memory) {
+        return teachersList;
+    }
+
+    function getListOfStudents() public view returns (address[] memory) {
+        return studentList;
+    }
+
+
+    function getListOfBOD() public view returns (address[] memory) {
+        return BODList;
     }
 
     function toBytes(string memory _name) public pure returns (bytes memory) {
         return abi.encodePacked(_name);
     }
 
-    //ENABLE AND DISABLE VOTING PROCESS ON OR OFF
-    //ENABLE AND DISABLE VOTING PROCESS ON OR OFF
-    //ENABLE AND DISABLE VOTING PROCESS ON OR OFF
-    bool public votingActive;
-
+    /****************************************
+    TOGGLE VOTING/RESULTS ON AND OFF
+    *****************************************/    
     function toggleVoting() public onlyByChairman returns (bool) {
         if (votingActive) {
             votingActive = false;
@@ -116,35 +133,6 @@ contract SimpleVoting {
         }
     }
 
-    function vote(uint256 _candidateID) public onlyStakeHolders {
-        stakeholders[msg.sender].voted = true;
-        stakeholders[msg.sender].candidateChosen = _candidateID;
-
-        Candidate memory chosenCandidate = candidatesList[_candidateID];
-        chosenCandidate.votesReceived++;
-        /*
-        if (stakeholders[msg.sender].role == Role(0)){
-            chosenCandidate.votesReceivedBOD++;
-        }
-        if (stakeholders[msg.sender].role == Role(1)){
-            chosenCandidate.votesReceivedTeachers++;
-        }
-        if (stakeholders[msg.sender].role == Role(2)){
-            chosenCandidate.votesReceivedStudents++;
-        }
-        */
-    }
-
-    modifier onlyStakeHolders() {
-        require(isAStakeholder(msg.sender), "Is not registered to vote");
-        _;
-    }
-
-    // ENABLE VIEWING RESUTLS ON AND OFF
-    // ENABLE VIEWING RESUTLS ON AND OFF
-    // ENABLE VIEWING RESUTLS ON AND OFF
-    bool public resultsActive;
-
     function toggleResult() public onlyByChairman returns (bool) {
         if (resultsActive) {
             resultsActive = false;
@@ -153,5 +141,45 @@ contract SimpleVoting {
             resultsActive = true;
             return resultsActive;
         }
+    }
+
+    /****************************************
+    ENABLE A STAKEHOLDER TO VOTE
+    *****************************************/
+
+    function vote (uint256 _candidateID) public onlyStakeHolders {
+        require(stakeholders[msg.sender].hasVoted == false, "You have voted before");
+        require(votingActive == true, "Voting Session is not active");
+        stakeholders[msg.sender].hasVoted = true; //mark that this stakeholder has voted
+        stakeholders[msg.sender].candidateChosen = _candidateID; //store who this stakeholder voted for
+
+        candidatesList[_candidateID].totalVotesReceived = candidatesList[_candidateID].totalVotesReceived + 1;
+        
+        if (stakeholders[msg.sender].role == Role(0)){
+            candidatesList[_candidateID].votesReceivedBOD = candidatesList[_candidateID].votesReceivedBOD + 1;
+        }
+        if (stakeholders[msg.sender].role == Role(1)){
+            candidatesList[_candidateID].votesReceivedTeachers = candidatesList[_candidateID].votesReceivedTeachers + 1;
+        }
+        if (stakeholders[msg.sender].role == Role(2)){
+            candidatesList[_candidateID].votesReceivedStudents = candidatesList[_candidateID].votesReceivedStudents + 1;
+        }
+        if (msg.sender == chairman){
+            candidatesList[_candidateID].receivedChairmansVote = true;
+        }
+    }
+
+    /****************************************
+    MODIFIERS
+    *****************************************/
+
+    modifier onlyByChairman() {
+        require(msg.sender == chairman, "Only Chairman can do this.");
+        _;
+    }
+
+        modifier onlyStakeHolders() {
+        require(isAStakeholder(msg.sender), "Is not registered to vote");
+        _;
     }
 }
