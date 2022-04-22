@@ -3,7 +3,6 @@ const serverUrl = "https://mrhyy1if02wl.usemoralis.com:2053/server";
 const appId = "AuH19PpSEOGZ1g2U08nV6tnNvgTkDMzaS8VqvjyI";
 Moralis.start({ serverUrl, appId });
 
-
 const ABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -232,19 +231,15 @@ async function logOut() {
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
-
-
 if (getStateData("votingStatus")) {
   document.getElementById("voting-status").style.backgroundColor = "green";
   document.getElementById("votingStatusText").innerHTML = "Voting Active";
 }
 
-
 if (!getStateData("votingStatus")) {
   document.getElementById("voting-status").style.backgroundColor = "red";
   document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
 }
-
 
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
@@ -255,12 +250,10 @@ if (getStateData("resultStatus")) {
   document.getElementById("resultStatusText").innerHTML = "Result Active";
 }
 
-
 if (!getStateData("resultStatus")) {
   document.getElementById("result-status").style.backgroundColor = "red";
   document.getElementById("resultStatusText").innerHTML = "Result Inactive";
 }
-
 
 //STATE MANAGEMENT FUNCTIONS
 //STATE MANAGEMENT FUNCTIONS
@@ -363,32 +356,68 @@ async function getListOfStudents() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
+//***********************I DO NOT THINK WE NEED THIS COD SNIPPENT BELOW.*****************************
+//***********************I DO NOT THINK WE NEED THIS COD SNIPPENT BELOW.*****************************
+//***********************I DO NOT THINK WE NEED THIS COD SNIPPENT BELOW.*****************************
 //ADD AND CREATE STAKEHOLDERS
 //ADD AND CREATE STAKEHOLDERS
 //ADD AND CREATE STAKEHOLDERS
 
-document.getElementById("btn-addStakeholder").onclick = addStakeholder;
+// document.getElementById("btn-addStakeholder").onclick = addStakeholder;
 
-async function addStakeholder() {
-  const address = document.getElementById("input-address").value;
-  const role = document.getElementById("roles").value;
-  await createStakeHolder(address, role);
-  document.getElementById("modal").classList.replace("hidden", "grid");
-  document.getElementById("modal-header").innerHTML = "Successful";
-  document.getElementById("modal-body").innerHTML = "Stakerholder created";
+// async function addStakeholder() {
+//   const address = document.getElementById("input-address").value;
+//   const role = document.getElementById("roles").value;
+//   await createStakeHolder(address, role);
+//   document.getElementById("modal").classList.replace("hidden", "grid");
+//   document.getElementById("modal-header").innerHTML = "Successful";
+//   document.getElementById("modal-body").innerHTML = "Stakerholder created";
+// }
+
+// async function createStakeHolder(address, role) {
+//   await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+//   const options = {
+//     chain: CHAIN,
+//     contractAddress: CONTRACTADDRESS,
+//     functionName: "createStakeHolder",
+//     abi: ABI,
+//     params: {
+//       _address: address,
+//       _role: role,
+//     },
+//   };
+//   return await Moralis.executeFunction(options);
+// }
+
+document.getElementById("btn-vote").onclick = vote;
+
+async function vote() {
+  const voterChoiceName = document.getElementById("input-voteChoice").value;
+  await voteSC(voterChoiceName);
+  console.log("success");
+  console.log(getListOfCandidates());
 }
 
-async function createStakeHolder(address, role) {
+async function voteSC(voterChoiceName) {
   await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
   const options = {
     chain: CHAIN,
     contractAddress: CONTRACTADDRESS,
-    functionName: "createStakeHolder",
+    functionName: "vote",
     abi: ABI,
     params: {
-      _address: address,
-      _role: role,
+      _candidateID: voterChoiceName,
     },
   };
   return await Moralis.executeFunction(options);
+}
+
+async function getListOfCandidates() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getListOfCandidates", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
 }

@@ -236,7 +236,7 @@ document.getElementById("btn-voting-close").onclick = votingClose;
 
 async function votingOpen(e) {
   e.preventDefault();
-  await Moralis.enableWeb3();
+  await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
   const votingActive = await toggleVoting();
   if (votingActive) {
     displayVotingStatusActive();
