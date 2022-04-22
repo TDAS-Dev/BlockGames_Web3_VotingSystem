@@ -2,6 +2,9 @@
 <html lang="en">
 
   <head>
+    <!-- Moralis SDK code -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +19,29 @@
 
   </head>
 
-  <body class="bg-zinc-900 font-heading">
+  <body class="bg-zinc-900 font-heading relative">
+    <!-- modal div -->
+    <div id="modal" class="hidden transition-all place-items-center mx-auto container absolute z-auto w-100 h-100">
+      <div class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
+        <div id="modal-content" class="">
+          <div id="modal-header" class="flex justify-between items-center py-2">
+            <h2 id="modal-title"></h2>
+            <span id="close" class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-body" class="px-3 py-10">
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-footer" class="flex justify-center items-center pt-3">
+            <button href="#close" id="closeBtn" style="font-size: 12px;"
+              class="font-sans text-sm font md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full cursor-pointer">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
     <div class="">
       <header class="container mx-auto my-10">
         <div class="flex  mx-5 justify-between items-center">
@@ -30,12 +55,12 @@
               <a href="./admin.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Admin</a>
               <a href="./vote.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Vote</a>
               <a href="./result.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Result</a>
-              <a
-              href="#"
+              <span
               style="font-size: 12px;"
+              id="wallet-address"
                 class="font-sans text-sm font md:mx-3 py-2 px-5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full cursor-pointer">
-                Connected
-              </a>
+                wallet-address
+              </span>
             </div>
           </div>
         </div>
@@ -43,19 +68,19 @@
 
       <main class="">
         <section class="container w-3/4 mx-auto text-white p-5">
-          <div class="flex justify-between items-center align-middle">
-            <div class="mx-3 mt-6">Candidate: 3</div>
-            <div class="mx-3 mt-6">Board of directors: 3</div>
-            <div class="mx-3 mt-6">Students</div>
-            <div class="mx-3 mt-6">Teachers: 3</div>
+          <div class="flex justify-between items-center align-middle" id="status">
+            <div class="mx-3 mt-6" id="candidateCount">Candidate: 0</div>
+            <div class="mx-3 mt-6" id="BODCount">Board of directors: 0</div>
+            <div class="mx-3 mt-6" id="studentCount">Students: 0</div>
+            <div class="mx-3 mt-6" id="teacherCount">Teachers: 0</div>
             <div class="flex justify-between">
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md animate-pulse bg-green-600 border-green-400"></div>
-                <div>Voting Inactive</div>
+                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="voting-status"></div>
+                <div id="votingStatusText">Voting Inactive</div>
               </div>
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md animate-pulse bg-red-600 border-red-400"></div>
-                <div>Result Inactive</div>
+                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="result-status"></div>
+                <div id="resultStatusText">Result Inactive</div>
               </div>
             </div>
           </div>
@@ -137,7 +162,7 @@
 
     </div>
 
-    <script src="../js_files/result.js"></script>
+    <script src="../js_files/vote.js"></script>
   </body>
 
 
