@@ -397,41 +397,58 @@ async function displayCandidatesOnScreen() {
   console.log(candidatesArray);
 
   //@abiola start from here
-
-  let counter = candidatesArray.length;
-  console.log(counter);
-
-  document.getElementById("candidate-list").innerHTML = `
-        <div class="cursor-pointer rounded-sm">
-        <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
-        <div class="bg-zinc-700 text-center w-52">
-        <h1 class="text-lg font-bold">ID: ${candidatesArray[0][0]}</h1>
-        <p class="font-sans font-light">${candidatesArray[0][1]}</p>
-        </div>
-        </div>
-
-        <div class="cursor-pointer rounded-sm">
-          <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
-          <div class="bg-zinc-700 text-center w-52">
-          <h1 class="text-lg font-bold">ID: ${candidatesArray[1][0]}</h1>
-          <p class="font-sans font-light">${candidatesArray[1][1]}</p>
-          </div>
-        </div>
-
-        <div class="cursor-pointer rounded-sm">
-          <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
-          <div class="bg-zinc-700 text-center w-52">
-          <h1 class="text-lg font-bold">ID: ${candidatesArray[2][0]}</h1>
-          <p class="font-sans font-light">${candidatesArray[2][1]}</p>
-          </div>
-        </div>
-
-        <div class="cursor-pointer rounded-sm">
-          <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
-          <div class="bg-zinc-700 text-center w-52">
-          <h1 class="text-lg font-bold">ID: ${candidatesArray[3][0]}</h1>
-          <p class="font-sans font-light">${candidatesArray[3][1]}</p>
-          </div>
-        </div>
-  `;
+  candidatesArray.length && loopCandidate(candidatesArray);
 }
+// <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+
+function loopCandidate(array) {
+  document.getElementById("candidate-list").innerHTML = array
+    .map(
+      (candidate) =>
+        `<div class="cursor-pointer rounded-sm">
+      <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+      <div class="bg-zinc-700 text-center w-52">
+      <h1 class="text-lg font-bold">ID: ${candidate[0]}</h1>
+      <p class="font-sans font-light">${candidate[1]}</p>
+      </div>
+      </div>
+      `
+    )
+    .join("");
+}
+
+// <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="">
+
+// `
+//         <div class="cursor-pointer rounded-sm">
+//         <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+//         <div class="bg-zinc-700 text-center w-52">
+//         <h1 class="text-lg font-bold">ID: ${candidatesArray[0][0]}</h1>
+//         <p class="font-sans font-light">${candidatesArray[0][1]}</p>
+//         </div>
+//         </div>
+
+//         <div class="cursor-pointer rounded-sm">
+//           <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+//           <div class="bg-zinc-700 text-center w-52">
+//           <h1 class="text-lg font-bold">ID: ${candidatesArray[1][0]}</h1>
+//           <p class="font-sans font-light">${candidatesArray[1][1]}</p>
+//           </div>
+//         </div>
+
+//         <div class="cursor-pointer rounded-sm">
+//           <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+//           <div class="bg-zinc-700 text-center w-52">
+//           <h1 class="text-lg font-bold">ID: ${candidatesArray[2][0]}</h1>
+//           <p class="font-sans font-light">${candidatesArray[2][1]}</p>
+//           </div>
+//         </div>
+
+//         <div class="cursor-pointer rounded-sm">
+//           <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+//           <div class="bg-zinc-700 text-center w-52">
+//           <h1 class="text-lg font-bold">ID: ${candidatesArray[3][0]}</h1>
+//           <p class="font-sans font-light">${candidatesArray[3][1]}</p>
+//           </div>
+//         </div>
+//   `;
