@@ -12,7 +12,7 @@
   "scripts": {
     "deploy": "npx hardhat run --network rinkeby scripts/deploy.js",
     "test": "hardhat run test",
-    "verify": "npx hardhat verify --network rinkeby 0xdF90D84E0409E8c8FCD91c853E4A7d417F88D68E"
+    "verify": "npx hardhat verify --network rinkeby 0xd39f7640739b1AF36d223709C5442e4944595ea1"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
