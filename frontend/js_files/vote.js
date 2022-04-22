@@ -389,13 +389,19 @@ async function getListOfStudents() {
 //   return await Moralis.executeFunction(options);
 // }
 
+//RUN THE VOTE FUNCTION
+//RUN THE VOTE FUNCTION
+//RUN THE VOTE FUNCTION
+
 document.getElementById("btn-vote").onclick = vote;
 
 async function vote() {
   const voterChoiceName = document.getElementById("input-voteChoice").value;
   await voteSC(voterChoiceName);
-  console.log("success");
-  console.log(getListOfCandidates());
+  document.getElementById("modal").classList.replace("hidden", "grid");
+  document.getElementById("modal-title").innerHTML = "VOTE SUCCESSFUL";
+  document.getElementById("modal-body").innerHTML =
+    "You have successfully voted";
 }
 
 async function voteSC(voterChoiceName) {
@@ -412,12 +418,16 @@ async function voteSC(voterChoiceName) {
   return await Moralis.executeFunction(options);
 }
 
-async function getListOfCandidates() {
-  const options = {
-    chain: CHAIN, //update
-    address: CONTRACTADDRESS, //update
-    function_name: "getListOfCandidates", //check
-    abi: ABI,
-  };
-  return await Moralis.Web3API.native.runContractFunction(options);
+//DISPLAY THE CANDIDATES ON THE SCREEN
+//DISPLAY THE CANDIDATES ON THE SCREEN
+//DISPLAY THE CANDIDATES ON THE SCREEN
+
+//NOTE DISPLAY JUST CANDIDATE NAME, CANDIDATE ID AND A FAKE IMAGE
+displayCandidatesOnScreen();
+async function displayCandidatesOnScreen() {
+  const candidatesArray = await getListOfCandidates(); //this stores the candidates list inside the variable
+  //you can console.log it to view the array
+  console.log(candidatesArray);
+
+  //@abiola start from here
 }
