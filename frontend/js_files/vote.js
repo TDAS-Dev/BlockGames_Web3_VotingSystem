@@ -3,10 +3,208 @@ const serverUrl = "https://mrhyy1if02wl.usemoralis.com:2053/server";
 const appId = "AuH19PpSEOGZ1g2U08nV6tnNvgTkDMzaS8VqvjyI";
 Moralis.start({ serverUrl, appId });
 
-const ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"BODList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"candidatesList","outputs":[{"internalType":"uint256","name":"candidateID","type":"uint256"},{"internalType":"string","name":"candidateName","type":"string"},{"internalType":"address","name":"registeredAddress","type":"address"},{"internalType":"uint8","name":"totalVotesReceived","type":"uint8"},{"internalType":"uint8","name":"votesReceivedBOD","type":"uint8"},{"internalType":"uint8","name":"votesReceivedTeachers","type":"uint8"},{"internalType":"uint8","name":"votesReceivedStudents","type":"uint8"},{"internalType":"bool","name":"receivedChairmansVote","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"chairman","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_candidateName","type":"string"}],"name":"createCandidate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"},{"internalType":"uint256","name":"_role","type":"uint256"}],"name":"createStakeHolder","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getListOfBOD","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfCandidates","outputs":[{"components":[{"internalType":"uint256","name":"candidateID","type":"uint256"},{"internalType":"string","name":"candidateName","type":"string"},{"internalType":"address","name":"registeredAddress","type":"address"},{"internalType":"uint8","name":"totalVotesReceived","type":"uint8"},{"internalType":"uint8","name":"votesReceivedBOD","type":"uint8"},{"internalType":"uint8","name":"votesReceivedTeachers","type":"uint8"},{"internalType":"uint8","name":"votesReceivedStudents","type":"uint8"},{"internalType":"bool","name":"receivedChairmansVote","type":"bool"}],"internalType":"struct SimpleVoting.Candidate[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfStakeHolders","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfStudents","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfTeachers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"isAStakeholder","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"resultsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"stakeholders","outputs":[{"internalType":"enum SimpleVoting.Role","name":"role","type":"uint8"},{"internalType":"bool","name":"hasVoted","type":"bool"},{"internalType":"uint256","name":"candidateChosen","type":"uint256"},{"internalType":"address","name":"registeredAddress","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"stakeholdersList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"studentList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"teachersList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_name","type":"string"}],"name":"toBytes","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"toggleResult","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"toggleVoting","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_candidateID","type":"uint256"}],"name":"vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"votingActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}]
+const ABI = [
+  { inputs: [], stateMutability: "nonpayable", type: "constructor" },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "BODList",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "candidatesList",
+    outputs: [
+      { internalType: "uint256", name: "candidateID", type: "uint256" },
+      { internalType: "string", name: "candidateName", type: "string" },
+      { internalType: "address", name: "registeredAddress", type: "address" },
+      { internalType: "uint8", name: "totalVotesReceived", type: "uint8" },
+      { internalType: "uint8", name: "votesReceivedBOD", type: "uint8" },
+      { internalType: "uint8", name: "votesReceivedTeachers", type: "uint8" },
+      { internalType: "uint8", name: "votesReceivedStudents", type: "uint8" },
+      { internalType: "bool", name: "receivedChairmansVote", type: "bool" },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "chairman",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "string", name: "_candidateName", type: "string" },
+    ],
+    name: "createCandidate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "_address", type: "address" },
+      { internalType: "uint256", name: "_role", type: "uint256" },
+    ],
+    name: "createStakeHolder",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getListOfBOD",
+    outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getListOfCandidates",
+    outputs: [
+      {
+        components: [
+          { internalType: "uint256", name: "candidateID", type: "uint256" },
+          { internalType: "string", name: "candidateName", type: "string" },
+          {
+            internalType: "address",
+            name: "registeredAddress",
+            type: "address",
+          },
+          { internalType: "uint8", name: "totalVotesReceived", type: "uint8" },
+          { internalType: "uint8", name: "votesReceivedBOD", type: "uint8" },
+          {
+            internalType: "uint8",
+            name: "votesReceivedTeachers",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "votesReceivedStudents",
+            type: "uint8",
+          },
+          { internalType: "bool", name: "receivedChairmansVote", type: "bool" },
+        ],
+        internalType: "struct SimpleVoting.Candidate[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getListOfStakeHolders",
+    outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getListOfStudents",
+    outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getListOfTeachers",
+    outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "_address", type: "address" }],
+    name: "isAStakeholder",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "resultsActive",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "stakeholders",
+    outputs: [
+      { internalType: "enum SimpleVoting.Role", name: "role", type: "uint8" },
+      { internalType: "bool", name: "hasVoted", type: "bool" },
+      { internalType: "uint256", name: "candidateChosen", type: "uint256" },
+      { internalType: "address", name: "registeredAddress", type: "address" },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "stakeholdersList",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "studentList",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "teachersList",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "string", name: "_name", type: "string" }],
+    name: "toBytes",
+    outputs: [{ internalType: "bytes", name: "", type: "bytes" }],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toggleResult",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toggleVoting",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "_candidateID", type: "uint256" },
+    ],
+    name: "vote",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "votingActive",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+];
 const CHAIN = "rinkeby";
-// const CONTRACTADDRESS = "0xCcE3556F422F011dbf3F9782d177Ee219eA011dE";
-const CONTRACTADDRESS = "0xd39f7640739b1AF36d223709C5442e4944595ea1";
+const CONTRACTADDRESS = "0xCcE3556F422F011dbf3F9782d177Ee219eA011dE";
+// const CONTRACTADDRESS = "0xd39f7640739b1AF36d223709C5442e4944595ea1";
 
 async function login() {
   let user = Moralis.User.current();
@@ -199,4 +397,46 @@ async function displayCandidatesOnScreen() {
   console.log(candidatesArray);
 
   //@abiola start from here
+
+  let counter = candidatesArray.length;
+  console.log(counter);
+  
+  document.getElementById("candidate-list").innerHTML = `
+        <div class="cursor-pointer rounded-sm">
+        <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+        <div class="bg-zinc-700 text-center w-52">
+        <p class="font-sans font-light">ID: ${candidatesArray[0][1]}</p>
+        <h1 class="text-lg font-bold">${candidatesArray[0][1]}</h1>
+        </div>
+        </div>
+
+        <div class="cursor-pointer rounded-sm">
+          <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+          <div class="bg-zinc-700 text-center w-52">
+          <p class="font-sans font-light">ID: ${candidatesArray[1][1]}</p>
+          <h1 class="text-lg font-bold">${candidatesArray[1][1]}</h1>
+          </div>
+        </div>
+
+        <div class="cursor-pointer rounded-sm">
+          <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+          <div class="bg-zinc-700 text-center w-52">
+          <p class="font-sans font-light">ID: ${candidatesArray[2][1]}</p>
+          <h1 class="text-lg font-bold">${candidatesArray[2][1]}</h1>
+          </div>
+        </div>
+
+        <div class="cursor-pointer rounded-sm">
+          <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
+          <div class="bg-zinc-700 text-center w-52">
+          <p class="font-sans font-light">ID: ${candidatesArray[3][1]}</p>
+          <h1 class="text-lg font-bold">${candidatesArray[3][1]}</h1>
+          </div>
+        </div>
+  `;
+}
+
+function mapper(val) {
+  const [id, name, addr, totalVotes, vBod, vT, vS, vC] = val;
+  return { id, name, addr, totalVotes, vBod, vT, vS, vC };
 }
