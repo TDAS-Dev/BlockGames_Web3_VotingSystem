@@ -14,9 +14,11 @@ to do list
 2. add comments --- david
 3. generate documentation === david
 4. write tests (at least 12) ---- Diac
-5. submit repo link ---- David
+5. submit repo link ---- Tega
 6. EMIT EVENTS within the smart contract ---- DAVID
-
+7. Add the function that allows the admin add several students at once. 
+8. Add the verification function to the smart contract__David
+9. Create and link the verify function to the SC ___ Tega and Abiola 
 
 INTEGRATION TASKS OUTSTANDING
 1. voting page and result page => configure the status bar and the wallet address => Abiola
