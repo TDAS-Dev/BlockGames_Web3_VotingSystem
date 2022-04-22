@@ -70,6 +70,12 @@ contract SimpleVoting {
         }
     }
 
+    function createMultipleStakeHolders(address[] memory _addressArray, uint256 _role ) public onlyByChairman {
+        for (uint256 i = 0; i < _addressArray.length; i++){
+            createStakeHolder(_addressArray[i], _role);
+        }
+    }
+    
     function isAStakeholder(address _address) public view returns (bool) {
         for (uint8 i = 0; i < stakeholdersList.length; i++) {
             if (_address == stakeholdersList[i]) {
@@ -94,6 +100,7 @@ contract SimpleVoting {
             Candidate(candidateID, _candidateName, msg.sender, 0, 0, 0, 0, false)
         );
     }
+
 
     function getListOfCandidates() public view returns (Candidate[] memory) {
         return candidatesList;

@@ -46,6 +46,16 @@ const ABI = [
   },
   {
     inputs: [
+      { internalType: "address[]", name: "_addressArray", type: "address[]" },
+      { internalType: "uint256", name: "_role", type: "uint256" },
+    ],
+    name: "createMultipleStakeHolders",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       { internalType: "address", name: "_address", type: "address" },
       { internalType: "uint256", name: "_role", type: "uint256" },
     ],
@@ -204,7 +214,7 @@ const ABI = [
 ];
 const CHAIN = "rinkeby";
 // const CONTRACTADDRESS = "0xd39f7640739b1AF36d223709C5442e4944595ea1";
-const CONTRACTADDRESS = "0xCcE3556F422F011dbf3F9782d177Ee219eA011dE";
+const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
 
 async function login() {
   let user = Moralis.User.current();
@@ -512,6 +522,38 @@ async function createStakeHolder(address, role) {
     abi: ABI,
     params: {
       _address: address,
+      _role: role,
+    },
+  };
+  return await Moralis.executeFunction(options);
+}
+
+//ADD AND CREATE MULTIPLE STAKEHOLDERS
+//ADD AND CREATE MULTIPLE STAKEHOLDERS
+//ADD AND CREATE MULTIPLE STAKEHOLDERS
+//function not properly functioning just yet
+document.getElementById("btn-multipleaddStakeholder").onclick =
+  addMultipleStakeholder;
+
+async function addMultipleStakeholder() {
+  const addressesArray = document.getElementById("input-address").value;
+  // const addressesArray = `[${addresses}]`;
+  const role = document.getElementById("roles").value;
+  await createMultipleStakeHolders(addressesArray, role);
+  document.getElementById("modal").classList.replace("hidden", "grid");
+  document.getElementById("modal-header").innerHTML = "Successful";
+  document.getElementById("modal-body").innerHTML = "Stakerholders created";
+}
+
+async function createMultipleStakeHolders(addresses, role) {
+  await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+  const options = {
+    chain: CHAIN,
+    contractAddress: CONTRACTADDRESS,
+    functionName: "createMultipleStakeHolders",
+    abi: ABI,
+    params: {
+      _addressArray: addresses,
       _role: role,
     },
   };
