@@ -3,207 +3,6 @@ const serverUrl = "https://mrhyy1if02wl.usemoralis.com:2053/server";
 const appId = "AuH19PpSEOGZ1g2U08nV6tnNvgTkDMzaS8VqvjyI";
 Moralis.start({ serverUrl, appId });
 
-
-// const ABI = [
-//   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
-//   {
-//     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-//     name: "BODList",
-//     outputs: [{ internalType: "address", name: "", type: "address" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-//     name: "candidatesList",
-//     outputs: [
-//       { internalType: "uint256", name: "candidateID", type: "uint256" },
-//       { internalType: "string", name: "candidateName", type: "string" },
-//       { internalType: "address", name: "registeredAddress", type: "address" },
-//       { internalType: "uint8", name: "totalVotesReceived", type: "uint8" },
-//       { internalType: "uint8", name: "votesReceivedBOD", type: "uint8" },
-//       { internalType: "uint8", name: "votesReceivedTeachers", type: "uint8" },
-//       { internalType: "uint8", name: "votesReceivedStudents", type: "uint8" },
-//       { internalType: "bool", name: "receivedChairmansVote", type: "bool" },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "chairman",
-//     outputs: [{ internalType: "address", name: "", type: "address" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       { internalType: "string", name: "_candidateName", type: "string" },
-//     ],
-//     name: "createCandidate",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       { internalType: "address", name: "_address", type: "address" },
-//       { internalType: "uint256", name: "_role", type: "uint256" },
-//     ],
-//     name: "createStakeHolder",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "getListOfBOD",
-//     outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "getListOfCandidates",
-//     outputs: [
-//       {
-//         components: [
-//           { internalType: "uint256", name: "candidateID", type: "uint256" },
-//           { internalType: "string", name: "candidateName", type: "string" },
-//           {
-//             internalType: "address",
-//             name: "registeredAddress",
-//             type: "address",
-//           },
-//           { internalType: "uint8", name: "totalVotesReceived", type: "uint8" },
-//           { internalType: "uint8", name: "votesReceivedBOD", type: "uint8" },
-//           {
-//             internalType: "uint8",
-//             name: "votesReceivedTeachers",
-//             type: "uint8",
-//           },
-//           {
-//             internalType: "uint8",
-//             name: "votesReceivedStudents",
-//             type: "uint8",
-//           },
-//           { internalType: "bool", name: "receivedChairmansVote", type: "bool" },
-//         ],
-//         internalType: "struct SimpleVoting.Candidate[]",
-//         name: "",
-//         type: "tuple[]",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "getListOfStakeHolders",
-//     outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "getListOfStudents",
-//     outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "getListOfTeachers",
-//     outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "address", name: "_address", type: "address" }],
-//     name: "isAStakeholder",
-//     outputs: [{ internalType: "bool", name: "", type: "bool" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "resultsActive",
-//     outputs: [{ internalType: "bool", name: "", type: "bool" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "address", name: "", type: "address" }],
-//     name: "stakeholders",
-//     outputs: [
-//       { internalType: "enum SimpleVoting.Role", name: "role", type: "uint8" },
-//       { internalType: "bool", name: "hasVoted", type: "bool" },
-//       { internalType: "uint256", name: "candidateChosen", type: "uint256" },
-//       { internalType: "address", name: "registeredAddress", type: "address" },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-//     name: "stakeholdersList",
-//     outputs: [{ internalType: "address", name: "", type: "address" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-//     name: "studentList",
-//     outputs: [{ internalType: "address", name: "", type: "address" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-//     name: "teachersList",
-//     outputs: [{ internalType: "address", name: "", type: "address" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [{ internalType: "string", name: "_name", type: "string" }],
-//     name: "toBytes",
-//     outputs: [{ internalType: "bytes", name: "", type: "bytes" }],
-//     stateMutability: "pure",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "toggleResult",
-//     outputs: [{ internalType: "bool", name: "", type: "bool" }],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "toggleVoting",
-//     outputs: [{ internalType: "bool", name: "", type: "bool" }],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       { internalType: "uint256", name: "_candidateID", type: "uint256" },
-//     ],
-//     name: "vote",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "votingActive",
-//     outputs: [{ internalType: "bool", name: "", type: "bool" }],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-// ];
-
 const ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"BODList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"candidatesList","outputs":[{"internalType":"uint256","name":"candidateID","type":"uint256"},{"internalType":"string","name":"candidateName","type":"string"},{"internalType":"address","name":"registeredAddress","type":"address"},{"internalType":"uint8","name":"totalVotesReceived","type":"uint8"},{"internalType":"uint8","name":"votesReceivedBOD","type":"uint8"},{"internalType":"uint8","name":"votesReceivedTeachers","type":"uint8"},{"internalType":"uint8","name":"votesReceivedStudents","type":"uint8"},{"internalType":"bool","name":"receivedChairmansVote","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"chairman","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_candidateName","type":"string"}],"name":"createCandidate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"},{"internalType":"uint256","name":"_role","type":"uint256"}],"name":"createStakeHolder","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getListOfBOD","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfCandidates","outputs":[{"components":[{"internalType":"uint256","name":"candidateID","type":"uint256"},{"internalType":"string","name":"candidateName","type":"string"},{"internalType":"address","name":"registeredAddress","type":"address"},{"internalType":"uint8","name":"totalVotesReceived","type":"uint8"},{"internalType":"uint8","name":"votesReceivedBOD","type":"uint8"},{"internalType":"uint8","name":"votesReceivedTeachers","type":"uint8"},{"internalType":"uint8","name":"votesReceivedStudents","type":"uint8"},{"internalType":"bool","name":"receivedChairmansVote","type":"bool"}],"internalType":"struct SimpleVoting.Candidate[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfStakeHolders","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfStudents","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getListOfTeachers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"isAStakeholder","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"resultsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"stakeholders","outputs":[{"internalType":"enum SimpleVoting.Role","name":"role","type":"uint8"},{"internalType":"bool","name":"hasVoted","type":"bool"},{"internalType":"uint256","name":"candidateChosen","type":"uint256"},{"internalType":"address","name":"registeredAddress","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"stakeholdersList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"studentList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"teachersList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_name","type":"string"}],"name":"toBytes","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"toggleResult","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"toggleVoting","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_candidateID","type":"uint256"}],"name":"vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"votingActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}]
 const CHAIN = "rinkeby";
 // const CONTRACTADDRESS = "0xCcE3556F422F011dbf3F9782d177Ee219eA011dE";
@@ -234,19 +33,15 @@ async function logOut() {
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
-
-
 if (getStateData("votingStatus")) {
   document.getElementById("voting-status").style.backgroundColor = "green";
   document.getElementById("votingStatusText").innerHTML = "Voting Active";
 }
 
-
 if (!getStateData("votingStatus")) {
   document.getElementById("voting-status").style.backgroundColor = "red";
   document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
 }
-
 
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
@@ -257,12 +52,10 @@ if (getStateData("resultStatus")) {
   document.getElementById("resultStatusText").innerHTML = "Result Active";
 }
 
-
 if (!getStateData("resultStatus")) {
   document.getElementById("result-status").style.backgroundColor = "red";
   document.getElementById("resultStatusText").innerHTML = "Result Inactive";
 }
-
 
 //STATE MANAGEMENT FUNCTIONS
 //STATE MANAGEMENT FUNCTIONS
@@ -365,32 +158,45 @@ async function getListOfStudents() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
-//ADD AND CREATE STAKEHOLDERS
-//ADD AND CREATE STAKEHOLDERS
-//ADD AND CREATE STAKEHOLDERS
+//RUN THE VOTE FUNCTION
+//RUN THE VOTE FUNCTION
+//RUN THE VOTE FUNCTION
 
-document.getElementById("btn-addStakeholder").onclick = addStakeholder;
+document.getElementById("btn-vote").onclick = vote;
 
-async function addStakeholder() {
-  const address = document.getElementById("input-address").value;
-  const role = document.getElementById("roles").value;
-  await createStakeHolder(address, role);
+async function vote() {
+  const voterChoiceName = document.getElementById("input-voteChoice").value;
+  await voteSC(voterChoiceName);
   document.getElementById("modal").classList.replace("hidden", "grid");
-  document.getElementById("modal-header").innerHTML = "Successful";
-  document.getElementById("modal-body").innerHTML = "Stakerholder created";
+  document.getElementById("modal-title").innerHTML = "VOTE SUCCESSFUL";
+  document.getElementById("modal-body").innerHTML =
+    "You have successfully voted";
 }
 
-async function createStakeHolder(address, role) {
+async function voteSC(voterChoiceName) {
   await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
   const options = {
     chain: CHAIN,
     contractAddress: CONTRACTADDRESS,
-    functionName: "createStakeHolder",
+    functionName: "vote",
     abi: ABI,
     params: {
-      _address: address,
-      _role: role,
+      _candidateID: voterChoiceName,
     },
   };
   return await Moralis.executeFunction(options);
+}
+
+//DISPLAY THE CANDIDATES ON THE SCREEN
+//DISPLAY THE CANDIDATES ON THE SCREEN
+//DISPLAY THE CANDIDATES ON THE SCREEN
+
+//NOTE DISPLAY JUST CANDIDATE NAME, CANDIDATE ID AND A FAKE IMAGE
+displayCandidatesOnScreen();
+async function displayCandidatesOnScreen() {
+  const candidatesArray = await getListOfCandidates(); //this stores the candidates list inside the variable
+  //you can console.log it to view the array
+  console.log(candidatesArray);
+
+  //@abiola start from here
 }

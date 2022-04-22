@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <!-- Moralis SDK code -->
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
@@ -9,14 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../src/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet">
-    <title>results</title>
-
-
+      rel="stylesheet"
+    />
+    <title>vote</title>
   </head>
 
   <body class="bg-zinc-900 font-heading relative">
@@ -31,12 +29,15 @@
               class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
           </div>
           <div class="border border-zinc-200 shadow-sm"></div>
-          <div id="modal-body" class="px-3 py-10">
-          </div>
+          <div id="modal-body" class="px-3 py-10"></div>
           <div class="border border-zinc-200 shadow-sm"></div>
           <div id="modal-footer" class="flex justify-center items-center pt-3">
-            <button href="#close" id="closeBtn" style="font-size: 12px;"
-              class="font-sans text-sm font md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full cursor-pointer">
+            <button
+              href="#close"
+              id="closeBtn"
+              style="font-size: 12px"
+              class="font-sans text-sm font md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full cursor-pointer"
+            >
               Close
             </button>
           </div>
@@ -46,7 +47,7 @@
     <!-- end of modal -->
     <div class="">
       <header class="container mx-auto my-10">
-        <div class="flex  mx-5 justify-between items-center">
+        <div class="flex mx-5 justify-between items-center">
           <div class="text-white block">
             <a class="block text-2xl" href=".././index.html">
               < Zuri <span class="text-red-600">.</span> Blockgames />
@@ -68,18 +69,27 @@
 
       <main class="">
         <section class="container w-3/4 mx-auto text-white p-5">
-          <div class="flex justify-between items-center align-middle" id="status">
+          <div
+            class="flex justify-between items-center align-middle"
+            id="status"
+          >
             <div class="mx-3 mt-6" id="candidateCount">Candidate: 0</div>
             <div class="mx-3 mt-6" id="BODCount">Board of directors: 0</div>
             <div class="mx-3 mt-6" id="studentCount">Students: 0</div>
             <div class="mx-3 mt-6" id="teacherCount">Teachers: 0</div>
             <div class="flex justify-between">
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="voting-status"></div>
+                <div
+                  class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400"
+                  id="voting-status"
+                ></div>
                 <div id="votingStatusText">Voting Inactive</div>
               </div>
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="result-status"></div>
+                <div
+                  class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400"
+                  id="result-status"
+                ></div>
                 <div id="resultStatusText">Result Inactive</div>
               </div>
             </div>
@@ -88,13 +98,16 @@
 
         <section class="w-4/5 mx-auto">
           <div
-            class="grid sm:grid-cols-1 md:grid-cols-2 items-center grid-cols-1 lg:grid-cols-2 grid-flow-col sm:my-8 my-32 gap-8">
+            class="grid sm:grid-cols-1 md:grid-cols-2 items-center grid-cols-1 lg:grid-cols-2 grid-flow-col sm:my-8 my-32 gap-8"
+          >
             <!-- form 1 -->
             <div id="form1">
-              <div class=" mt-14 text-white">
+              <div class="mt-14 text-white">
                 <h3 class="text-2xl font-sans">Cast your Vote</h3>
-                <p class="font-thin mb-5">Place your vote. Please note, you can only vote once. You will not be
-                  allowed to change your vote.</p>
+                <p class="font-thin mb-5">
+                  Place your vote. Please note, you can only vote once. You will
+                  not be allowed to change your vote.
+                </p>
 
                 <div class="grid grid-cols-2 gap-8">
                   <div class="cursor-pointer rounded-sm">
@@ -130,48 +143,46 @@
                     </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
             <!-- form 2 -->
             <div id="form2">
-
-
-
               <div class="mt-14 px-10">
-
                 <form action="#candidateForm">
                   <div class="my-8">
-                    <input type="text" class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
-                      placeholder="Type in the name of your Candidate">
+                    <input
+                      type="text"
+                      id="input-voteChoice"
+                      class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
+                      placeholder="Type in the name of your Candidate"
+                    />
                   </div>
                   <div class="my-8">
-                    <input type="text" class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
-                      placeholder="Input your secret Code">
+                    <input
+                      type="text"
+                      class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
+                      placeholder="Input your secret Code"
+                    />
                   </div>
                   <div class="my-5">
                     <div class="flex items-center justify-center">
-                      <button type="button"
-                        class="rounded-full px-8 py-2 block w-100 text-red-100 hover:text-white bg-red-600 hover:bg-red-500 border-red-400">
+                      <button
+                        type="button"
+                        id="btn-vote"
+                        class="rounded-full px-8 py-2 block w-100 text-red-100 hover:text-white bg-red-600 hover:bg-red-500 border-red-400"
+                      >
                         Cast Vote
                       </button>
-
                     </div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-
         </section>
-
       </main>
-
     </div>
 
     <script src="../js_files/vote.js"></script>
   </body>
-
-
 </html>
