@@ -2,6 +2,9 @@
 <html lang="en">
 
   <head>
+    <!-- Moralis SDK code -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,15 +15,38 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet">
     <title>results</title>
-
-
   </head>
 
-  <body class="bg-zinc-900 font-heading">
+  <body class="bg-zinc-900 font-heading relative">
+    <!-- modal div -->
+    <div id="modal" class="hidden transition-all place-items-center mx-auto container absolute z-auto w-100 h-100">
+      <div
+        class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
+        <div id="modal-content" class="">
+          <div id="modal-header" class="flex justify-between items-center py-2">
+            <h2 id="modal-title"></h2>
+            <span id="close"
+              class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-body" class="px-3 py-10">
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-footer" class="flex justify-center items-center pt-3">
+            <button href="#close" id="closeBtn" style="font-size: 12px;"
+              class="font-sans text-sm font md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full cursor-pointer">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
     <div class="">
+      <!--  navigation menu -->
       <header class="container mx-auto my-10">
         <div class="flex  mx-5 justify-between items-center">
-          <div class="text-white block">
+          <div class="text-white">
             <a class="block text-2xl" href=".././index.html">
               < Zuri <span class="text-red-600">.</span> Blockgames />
             </a>
@@ -30,37 +56,37 @@
               <a href="./admin.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Admin</a>
               <a href="./vote.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Vote</a>
               <a href="./result.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Result</a>
-              <a
-              href="#"
-              style="font-size: 12px;"
+              <a href="#" style="font-size: 12px;" id="wallet-address"
                 class="font-sans text-sm font md:mx-3 py-2 px-5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full cursor-pointer">
-                Connected
+                wallet-address
               </a>
             </div>
-            
           </div>
         </div>
       </header>
+      <!-- navigation menu -->
 
       <main class="">
+        <!-- status bar -->
         <section class="container w-3/4 mx-auto text-white p-5">
-          <div class="flex justify-between items-center align-middle">
-            <div class="mx-3 mt-6">Candidate: 3</div>
-            <div class="mx-3 mt-6">Board of directors: 3</div>
-            <div class="mx-3 mt-6">Students</div>
-            <div class="mx-3 mt-6">Teachers: 3</div>
+          <div class="flex justify-between items-center align-middle" id="status">
+            <div class="mx-3 mt-6" id="candidateCount">Candidate: 0</div>
+            <div class="mx-3 mt-6" id="BODCount">Board of directors: 0</div>
+            <div class="mx-3 mt-6" id="studentCount">Students: 0</div>
+            <div class="mx-3 mt-6" id="teacherCount">Teachers: 0</div>
             <div class="flex justify-between">
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md animate-pulse bg-green-600 border-green-400"></div>
-                <div>Voting Inactive</div>
+                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="voting-status"></div>
+                <div id="votingStatusText">Voting Inactive</div>
               </div>
               <div class="mx-3 flex flex-col justify-center items-center">
-                <div class="p-1 h-6 w-12 shadow-md animate-pulse bg-red-600 border-red-400"></div>
-                <div>Result Inactive</div>
+                <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="result-status"></div>
+                <div id="resultStatusText">Result Inactive</div>
               </div>
             </div>
           </div>
         </section>
+        <!-- end of status bar -->
 
         <section class="w-4/5 mx-auto">
           <div class=" mt-14 text-white">
@@ -69,48 +95,60 @@
               to change your vote.</p>
 
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-4 my-32 gap-8 text-white">
+          <div class="grid grid-cols-1 md:grid-cols-4 my-32 gap-8 text-white" id="result list">
 
             <div>
-              <div
-                style="background-image: url('data:image/jpeg;base64,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F2KpzuUa9OSRhb82bkVenruec6trmK5r0Vr2KrXtXW1yLZWr2KV8R3tNVVGWcNmR6bXKut2DNjenxFyr0SMDZy/qT67HaHJZFwFwFwFwFwLi0XcgZ3s/rLHDeGxum/NzujkmMRIVLMDCR3N0gawAAAAAAAAAAAAAAAAAAAAAAAAAAAUlpiyCxlbDLHgla17pk6Hxq1rnJ2o5njciX6Yp/wCS80XM3/6U+nJG0REsiak1EJqoiIjKAPoAAAAAFx6LeQM72f1ljhvDY7Tfm53RyTKI7qlmqgaFW4AAAAAAAAAAAAAAAAAAAAAAAAAAAAFH5+5ZSrrJHMcqxQp7KLHg8FV3T2ptdfHnRGldfr16v2bPReE6CznP1Vd8/wCIR25wWZcBcBcBcBcBcC5NFnIGd7P6yxw3hsfprzc7o5JixyId1S4e+4GIAAAAAAAAAAAAAAAAAAAAAAAAAAAIjpIzg3rT+yjdaeqRWttrZH8b/wBE2rsOF+5q05RtlbaJwfT3der6aefoplCvbBzcBcBcBcBcBcBcC5NFf4ezvZ/WWGH8Nj9NebndHJLzuqQAAAAAAAAAAAAAAAAAAAAAAAAAAAGqpqGRsfJIqNZG1XPcupGol1U+TOUZvVFE11RTTtlQWcmWX1tRJO66I5bRN/kiTit/VdqqVtyvXqzbrCYaMPai3H873WHhJAAAAAAAALm0Vfh7O9n9ZPw/0Mhprzc7o5Jed1SAAAAAAAAAAAAAAAAAAAAAAAAAAAArbSxnBZG0ES4us+pVF1N1sj8da9idJFxFz9MNDoTCZz09W6P8yrIhtIAAAAAAAAALn0Vfh7O9n9ZPw/0Mfprzc7o5Jed1UAAAAAAAAAAAAAAAAAAAAAAAAAAB12cGVo6OnlqJNUacFvO964NYnav6nmuqKYzd8Nh6r92LdPryefqyqkmkkllXdSSuVz16VX9ObsQrZnOc5bq3RTbpiinZDSfHsAAAAAAAAAXRop/D2d7P6ydh/oZDTPmp3RyTA7qoAAAAAAAAAAAAAAAAAAAAAAAAAACmtJ+cO+aje8a3hpFVFsuD5tTl+Xi/7iFfr1pyhrNEYTorXSVbauXyhdzgty4C4C4C4C4C4C4C4C4F06KPw9nez+snYf6GR0z5qd0ckwOyqAAAAAAAAAAAAAAAAAAAAAAAAAB8+UIpHxSMiekUj2qjJFbutwq4brc3S9u0+TEzHc92qqaa4mqM49lbe6aTrrfKOv8A9hF6tPu0Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+PwnGaWQ1oKZtOsiSq1z3btGbi+6W9rXX/kkW6NSnJT43E9Zuzcyy2cH//Z');"
-                class="h-52 rounded-sm shadow-md transition-shadow hover:scale-105 ease-in-out duration-500 hover:shadow-red-300 w-52 px-2 py-16 bg-gray-100 h-100 w-100 object-cover bg-no-repeat bg-cover bg-center text-red-600">
-                <h1 class="text-lg font-semibold">FirstName Lastname</h1>
-                <p class="font-sans font-light">Change and Positivity</p>
-                <i>23 years</i>
+              <div class="cursor-pointer rounded-sm">
+                <img
+                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
+                  alt="voters image" srcset="" class="h-52 w-52">
+                <div class="bg-zinc-700 text-center w-52">
+                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
+                  <p class="font-sans font-light">Change and Positivity</p>
+                  <hr>
+                  <p class="text-center text-sm py-2 font-light">10 votes</p>
+                </div>
               </div>
-              <p class="text-center mt-4 text-sm font-light">10 votes</p>
             </div>
 
             <div>
-              <div
-                style="background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw4QEg8QDxERERAOFBATDhAVDRESDxARGBEXFhcRExUYHSkgGB4lGx8VJjEiJSkrLjouFx82ODMsNyktLisBCgoKDg0OGxAQGismHyYtLS8tLS0tLS0tMC0tLTUtLTUtLS03LS0tLS0tLS0tLi0tLS0tLS0tLS0tLS0tNS0tLf/AABEIALABHgMBEQACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABgcCAwEFCAT/xABAEAABAwIBBQ0GBAUFAAAAAAAAAQIDBBEhBQYHMWESFCIyNEFRVHFzgZSyExdCgqHTNZHB0RVSU9LhI5Kxs8L/xAAbAQEAAwEBAQEAAAAAAAAAAAAABAUGAwIBB//EADURAQABAgIGCQMDBAMAAAAAAAABAgMEEQUSMXGhsRMUFSEzNEFR4TJTkUJhgSNDwfAiUtH/2gAMAwEAAhEDEQA/ALpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+bKNdFTxyTTORkUSbp7lRVsnYmKrsQ+TMRGcvdFFVdUU07ZRv3kZG6y7ylT/Yc+no90vs7Ef9eMPqyZnzkyplZBBM58sqqjG72qEvZLrirLIlr4qfYu0zOUS53MHet061Ud2+EgmlazjLY6IriCdj0VWLdEVUXYvQM32aZja2B8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVDpezj9pI2hiXgQKjqhUXB0tuCz5Ux7VToIWIuZzqwvNGYfVp6Wds7NytnKRoWkyuDQ7m57GF2UJk/wBSpTc06LrZBfF/zL9ETpJ1ijKM1DpHEa1XRxsjbvdpnblz2SOVNaYNTpdzHS7ci3Tm4YHCzib0W42eu59mjl6uo0c5budLOrlXWqq/WcsLMzbzn3lL01RFGK1adkRTySckqkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADo88svtoKWSfBZF4FO1filVMPBMVXYhzuV6lOaRhbE3rkU+nrueeJZHOVz3qrnPVXPcutzlW6uXaq3K3a1MRERlDtszM3nZRq44MfZN4dS5PhiRcUvzK5cE7b8x2tUa0oeLv9FRNXr6L7ytUshjRrERrWojWtRLI1qJZERCwZqZz71QZfygs0q48Ft0TavOpVYm7r1ZRsht9D4Lq9nWq+qrl6QsjRryFneTeol4PwvyoNO+cndHJKSUpwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKF0jZx7+qlSNb09Nuo4eh634cviqYbETpK+9c1qv2aXA4fobfftnaiMjrHKEqqV9aOs3f4dRo6VLVNTaSovrZhwIvlT6qpYWqNWGbxl/pbndsjY6TPbLK2VjV4T7omxOdTnibupTlG2UzQ+C6xe1qo/40987/SEEKpt1t6NeQs7yb1Fpg/C/LE6d85O6OSUkpTgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWlLOTelN7CJ1p6tFaiouLItT37L6k7dhwv3NWnL3WGjsP0lzWnZHNRy4EBoZlM9FObW/KrfErb09EqOW+qSbWxm23GXsTpJNijOc1Zj8RqUasbZ5LWzlymjGuxtZFuTJnKM5UdFE11RTTtlUOUKtZnuevPxU6E5inu3JuVZv0DA4WMNZi3G313vmOSWtvRryFneTeotcJ4X5YrTvnJ3RyStjbklTuHNsBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA01dTHCx8sjkbHE1z3uXUjUS6qfJnKM3qmmaqopjbLzpnNlp9dUy1L7oj1tE3+nEnFZ+WK7VUra69erNqrFmLNuKI/2XWQQSSvZFE1XSSuayNqa3OVbIh8pjOcn25XFMTMvRGQslR5No4qdqoqsS8r/6kq4vf+erYiIWVFOrGTMX7s3a5qlX+eeVle72bV2v7OZCJi7vdqQvdBYLOenq9O6P/UWuV7UlwLb0achZ3k3qLTCeH+WK055yd0ckuiJKoZKlwNKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKt0w5ycXJ8Tv5X1aoviyL/0vykTE3P0wudGYf8Au1fwqtykSFxMrO0M5t3V+Upm4N3UdIi9OqSVPq1PmJmHo/UpdI4j+3H8pVnflhI2OW+rm6V5kO9yuKKdaUDC4erEXYt0+qqZZVe5XOxVy3Up6qpqnOX6Bat02qIop2QwPj2AW7oz5CzvJvUWeE8P8sXpzzc7o5JdESVQzAwkTnA1gAAAAAAAAAAAAAAAAAAAAAAAAAAA6vOXLMdDTy1D8dwlo2348i4NYnav0ueK64ppzdrFmb1yKIedKyqkmfJLK7dSSuc+R3S5VuvhsK2ZmZzlqqaYppimNkN+b+R5K6phpYsFlXhuthHGmL3r2J9bJznu3RrTk4Yi9FuiapehKhIqSBkMSbmOFjWRt6Golk7VLGIyjJmKqpqmapVLnRlNZpVai8Fir4u/x+5XYq5rVasbIa7QuD6K30tW2rl8uluRcl2XGQXGQt3RlyFneTeos8J4f5YvTnm53RyS+IkqhmAA0uSwHAAAAAAAAAAAAAAAAAAAAAAAAAAAUhpTzj31U73jW8FIqtwXB82p7vDip83SQMRc1qsvZotHYfo7etO2eSDvccITpldOibN3elMtZMlp6xEVqKmMcGtre13GX5egn2KNWM2ex9/Xr1Y2Rza898t7lqo1eE7Bv7+B9v3NSn93rRmD6zeiJ+mO+Vb3KpuYjIAAALf0Y8gZ3k3rLPC+H+WM055ud0ckviJCoZgAMZGgagAAAAAAAAAAAAAAAAAAAAAAAABFdIuce8aVfZraoqLxwdLcOFL8qfVUON65q0/um4HD9Nc79kbVCKV7SJDo+zb/AIjVtY9L08FpKleZW34MXzKn5I472aNaUHG4joqO7bOxdmX69sbFRLIiJ2IiE9nYiZnJTOWK9Z5XP+FMGdnT4lVeua9WbdaOwkYazFM7Z75/39nxXOSeXAXAXAt/RhyBneTesssL4bGab83O6OSYREhUMwAADSvOBwAAAAAAAAAAAAAAAAAAAAAAA4cqIiqupMV7APO+eecDsoVUk2Psm8CnavwxIuC26XLivbbmK27Xr1ZtThbEWbcU+vrvdBIp4h3qleOi2OmhyZHJC7dPmV7ql1rOSZFssa7GpZE/PnLCzERT3M3jqqpvTFXpsR7PrLKuVYmri/jbG/5/c5Ym5lGrHqsdCYPpLnTVbKdm/wCEKK9rAAByBwBcOjDkDO8m9ZZYXw2N035ud0ckwiJCoZgAMXrYDUAAAAAAAAAAAAAAAAAAAAAAAAAKK0m5u7zqlkjS0FXunx2TBkl+HH+eKbHbCvv0atWfu0eAxHS28p2whsiHKEyp3OZOc7qSSSByqsNSl1RMdzK1uDk7UwXw6CVar1Y71XicPN+qKadrbVVDpHue7W5b9nQhDrqmqc5afD2KbFuLdPo1Hl2AAAABcOi/kDO9m9ZY4bw2N035ud0ckxiJCpZgANL1uBwAAAAAAAAAAAAAAAAAAAAAAAAAOkzwyC2vpZIFsknHgcvwSonBXsXFF2KpzuUa9OSRhb82bkVenruec6trmK5r0Vr2KrXtXW1yLZWr2KV8R3tNVVGWcNmR6bXKut2DNjenxFyr0SMDZy/qT67HaHJZFwFwFwFwFwLi0XcgZ3s/rLHDeGxum/NzujkmMRIVLMDCR3N0gawAAAAAAAAAAAAAAAAAAAAAAAAAAAUlpiyCxlbDLHgla17pk6Hxq1rnJ2o5njciX6Yp/wCS80XM3/6U+nJG0REsiak1EJqoiIjKAPoAAAAAFx6LeQM72f1ljhvDY7Tfm53RyTKI7qlmqgaFW4AAAAAAAAAAAAAAAAAAAAAAAAAAAAFH5+5ZSrrJHMcqxQp7KLHg8FV3T2ptdfHnRGldfr16v2bPReE6CznP1Vd8/wCIR25wWZcBcBcBcBcBcC5NFnIGd7P6yxw3hsfprzc7o5JixyId1S4e+4GIAAAAAAAAAAAAAAAAAAAAAAAAAAAIjpIzg3rT+yjdaeqRWttrZH8b/wBE2rsOF+5q05RtlbaJwfT3der6aefoplCvbBzcBcBcBcBcBcBcC5NFf4ezvZ/WWGH8Nj9NebndHJLzuqQAAAAAAAAAAAAAAAAAAAAAAAAAAAGqpqGRsfJIqNZG1XPcupGol1U+TOUZvVFE11RTTtlQWcmWX1tRJO66I5bRN/kiTit/VdqqVtyvXqzbrCYaMPai3H873WHhJAAAAAAAALm0Vfh7O9n9ZPw/0Mhprzc7o5Jed1SAAAAAAAAAAAAAAAAAAAAAAAAAAAArbSxnBZG0ES4us+pVF1N1sj8da9idJFxFz9MNDoTCZz09W6P8yrIhtIAAAAAAAAALn0Vfh7O9n9ZPw/0Mfprzc7o5Jed1UAAAAAAAAAAAAAAAAAAAAAAAAAAB12cGVo6OnlqJNUacFvO964NYnav6nmuqKYzd8Nh6r92LdPryefqyqkmkkllXdSSuVz16VX9ObsQrZnOc5bq3RTbpiinZDSfHsAAAAAAAAAXRop/D2d7P6ydh/oZDTPmp3RyTA7qoAAAAAAAAAAAAAAAAAAAAAAAAAACmtJ+cO+aje8a3hpFVFsuD5tTl+Xi/7iFfr1pyhrNEYTorXSVbauXyhdzgty4C4C4C4C4C4C4C4C4F06KPw9nez+snYf6GR0z5qd0ckwOyqAAAAAAAAAAAAAAAAAAAAAAAAAB8+UIpHxSMiekUj2qjJFbutwq4brc3S9u0+TEzHc92qqaa4mqM49lbe6aTrrfKOv8A9hF6tPu0Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+PwnGaWQ1oKZtOsiSq1z3btGbi+6W9rXX/kkW6NSnJT43E9Zuzcyy2cH//Z');"
-                class="h-52 rounded-sm shadow-md transition-shadow hover:scale-105 ease-in-out duration-500 hover:shadow-red-300 w-52 px-2 py-16 bg-gray-100 h-100 w-100 object-cover bg-no-repeat bg-cover bg-center text-red-600">
-                <h1 class="text-lg font-semibold">FirstName Lastname</h1>
-                <p class="font-sans font-light">Change and Positivity</p>
-                <i>23 years</i>
+              <div class="cursor-pointer rounded-sm">
+                <img
+                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
+                  alt="voters image" srcset="" class="h-52 w-52">
+                <div class="bg-zinc-700 text-center w-52">
+                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
+                  <p class="font-sans font-light">Change and Positivity</p>
+                  <hr>
+                  <p class="text-center text-sm py-2 font-light">10 votes</p>
+                </div>
               </div>
-              <p class="text-center mt-4 text-sm font-light">10 votes</p>
             </div>
             <div>
-              <div
-                style="background-image: url('data:image/jpeg;base64,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F2KpzuUa9OSRhb82bkVenruec6trmK5r0Vr2KrXtXW1yLZWr2KV8R3tNVVGWcNmR6bXKut2DNjenxFyr0SMDZy/qT67HaHJZFwFwFwFwFwLi0XcgZ3s/rLHDeGxum/NzujkmMRIVLMDCR3N0gawAAAAAAAAAAAAAAAAAAAAAAAAAAAUlpiyCxlbDLHgla17pk6Hxq1rnJ2o5njciX6Yp/wCS80XM3/6U+nJG0REsiak1EJqoiIjKAPoAAAAAFx6LeQM72f1ljhvDY7Tfm53RyTKI7qlmqgaFW4AAAAAAAAAAAAAAAAAAAAAAAAAAAAFH5+5ZSrrJHMcqxQp7KLHg8FV3T2ptdfHnRGldfr16v2bPReE6CznP1Vd8/wCIR25wWZcBcBcBcBcBcC5NFnIGd7P6yxw3hsfprzc7o5JixyId1S4e+4GIAAAAAAAAAAAAAAAAAAAAAAAAAAAIjpIzg3rT+yjdaeqRWttrZH8b/wBE2rsOF+5q05RtlbaJwfT3der6aefoplCvbBzcBcBcBcBcBcBcC5NFf4ezvZ/WWGH8Nj9NebndHJLzuqQAAAAAAAAAAAAAAAAAAAAAAAAAAAGqpqGRsfJIqNZG1XPcupGol1U+TOUZvVFE11RTTtlQWcmWX1tRJO66I5bRN/kiTit/VdqqVtyvXqzbrCYaMPai3H873WHhJAAAAAAAALm0Vfh7O9n9ZPw/0Mhprzc7o5Jed1SAAAAAAAAAAAAAAAAAAAAAAAAAAAArbSxnBZG0ES4us+pVF1N1sj8da9idJFxFz9MNDoTCZz09W6P8yrIhtIAAAAAAAAALn0Vfh7O9n9ZPw/0Mfprzc7o5Jed1UAAAAAAAAAAAAAAAAAAAAAAAAAAB12cGVo6OnlqJNUacFvO964NYnav6nmuqKYzd8Nh6r92LdPryefqyqkmkkllXdSSuVz16VX9ObsQrZnOc5bq3RTbpiinZDSfHsAAAAAAAAAXRop/D2d7P6ydh/oZDTPmp3RyTA7qoAAAAAAAAAAAAAAAAAAAAAAAAAACmtJ+cO+aje8a3hpFVFsuD5tTl+Xi/7iFfr1pyhrNEYTorXSVbauXyhdzgty4C4C4C4C4C4C4C4C4F06KPw9nez+snYf6GR0z5qd0ckwOyqAAAAAAAAAAAAAAAAAAAAAAAAAB8+UIpHxSMiekUj2qjJFbutwq4brc3S9u0+TEzHc92qqaa4mqM49lbe6aTrrfKOv8A9hF6tPu0Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+PwnGaWQ1oKZtOsiSq1z3btGbi+6W9rXX/kkW6NSnJT43E9Zuzcyy2cH//Z');"
-                class="h-52 rounded-sm shadow-md transition-shadow hover:scale-105 ease-in-out duration-500 hover:shadow-red-300 w-52 px-2 py-16 bg-gray-100 h-100 w-100 object-cover bg-no-repeat bg-cover bg-center text-red-600">
-                <h1 class="text-lg font-semibold">FirstName Lastname</h1>
-                <p class="font-sans font-light">Change and Positivity</p>
-                <i>23 years</i>
+              <div class="cursor-pointer rounded-sm">
+                <img
+                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
+                  alt="voters image" srcset="" class="h-52 w-52">
+                <div class="bg-zinc-700 text-center w-52">
+                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
+                  <p class="font-sans font-light">Change and Positivity</p>
+                  <hr>
+                  <p class="text-center text-sm py-2 font-light">10 votes</p>
+                </div>
               </div>
-              <p class="text-center mt-4 text-sm font-light">10 votes</p>
             </div>
             <div>
-              <div
-                style="background-image: url('data:image/jpeg;base64,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F2KpzuUa9OSRhb82bkVenruec6trmK5r0Vr2KrXtXW1yLZWr2KV8R3tNVVGWcNmR6bXKut2DNjenxFyr0SMDZy/qT67HaHJZFwFwFwFwFwLi0XcgZ3s/rLHDeGxum/NzujkmMRIVLMDCR3N0gawAAAAAAAAAAAAAAAAAAAAAAAAAAAUlpiyCxlbDLHgla17pk6Hxq1rnJ2o5njciX6Yp/wCS80XM3/6U+nJG0REsiak1EJqoiIjKAPoAAAAAFx6LeQM72f1ljhvDY7Tfm53RyTKI7qlmqgaFW4AAAAAAAAAAAAAAAAAAAAAAAAAAAAFH5+5ZSrrJHMcqxQp7KLHg8FV3T2ptdfHnRGldfr16v2bPReE6CznP1Vd8/wCIR25wWZcBcBcBcBcBcC5NFnIGd7P6yxw3hsfprzc7o5JixyId1S4e+4GIAAAAAAAAAAAAAAAAAAAAAAAAAAAIjpIzg3rT+yjdaeqRWttrZH8b/wBE2rsOF+5q05RtlbaJwfT3der6aefoplCvbBzcBcBcBcBcBcBcC5NFf4ezvZ/WWGH8Nj9NebndHJLzuqQAAAAAAAAAAAAAAAAAAAAAAAAAAAGqpqGRsfJIqNZG1XPcupGol1U+TOUZvVFE11RTTtlQWcmWX1tRJO66I5bRN/kiTit/VdqqVtyvXqzbrCYaMPai3H873WHhJAAAAAAAALm0Vfh7O9n9ZPw/0Mhprzc7o5Jed1SAAAAAAAAAAAAAAAAAAAAAAAAAAAArbSxnBZG0ES4us+pVF1N1sj8da9idJFxFz9MNDoTCZz09W6P8yrIhtIAAAAAAAAALn0Vfh7O9n9ZPw/0Mfprzc7o5Jed1UAAAAAAAAAAAAAAAAAAAAAAAAAAB12cGVo6OnlqJNUacFvO964NYnav6nmuqKYzd8Nh6r92LdPryefqyqkmkkllXdSSuVz16VX9ObsQrZnOc5bq3RTbpiinZDSfHsAAAAAAAAAXRop/D2d7P6ydh/oZDTPmp3RyTA7qoAAAAAAAAAAAAAAAAAAAAAAAAAACmtJ+cO+aje8a3hpFVFsuD5tTl+Xi/7iFfr1pyhrNEYTorXSVbauXyhdzgty4C4C4C4C4C4C4C4C4F06KPw9nez+snYf6GR0z5qd0ckwOyqAAAAAAAAAAAAAAAAAAAAAAAAAB8+UIpHxSMiekUj2qjJFbutwq4brc3S9u0+TEzHc92qqaa4mqM49lbe6aTrrfKOv8A9hF6tPu0Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+Pwe6WTrrfKL9wdWn34Hb1P2+PwnGaWQ1oKZtOsiSq1z3btGbi+6W9rXX/kkW6NSnJT43E9Zuzcyy2cH//Z');"
-                class="h-52 rounded-sm shadow-md transition-shadow hover:scale-105 ease-in-out duration-500 hover:shadow-red-300 w-52 px-2 py-16 bg-gray-100 h-100 w-100 object-cover bg-no-repeat bg-cover bg-center text-red-600">
-                <h1 class="text-lg font-semibold">FirstName Lastname</h1>
-                <p class="font-sans font-light">Change and Positivity</p>
-                <i>23 years</i>
+              <div class="cursor-pointer rounded-sm">
+                <img
+                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
+                  alt="voters image" srcset="" class="h-52 w-52">
+                <div class="bg-zinc-700 text-center w-52">
+                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
+                  <p class="font-sans font-light">Change and Positivity</p>
+                  <hr>
+                  <p class="text-center text-sm py-2 font-light">10 votes</p>
+                </div>
               </div>
-              <p class="text-center mt-4 text-sm font-light">10 votes</p>
             </div>
 
           </div>

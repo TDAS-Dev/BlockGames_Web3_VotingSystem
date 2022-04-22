@@ -19,7 +19,29 @@
 
   </head>
 
-  <body class="bg-zinc-900 font-heading">
+  <body class="bg-zinc-900 font-heading relative">
+    <!-- modal div -->
+    <div id="modal" class="hidden transition-all place-items-center mx-auto container absolute z-auto w-100 h-100">
+      <div class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
+        <div id="modal-content" class="">
+          <div id="modal-header" class="flex justify-between items-center py-2">
+            <h2 id="modal-title"></h2>
+            <span id="close" class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-body" class="px-3 py-10">
+          </div>
+          <div class="border border-zinc-200 shadow-sm"></div>
+          <div id="modal-footer" class="flex justify-center items-center pt-3">
+            <button href="#close" id="closeBtn" style="font-size: 12px;"
+              class="font-sans text-sm font md:mx-3 py-2 px-7 bg-red-600 hover:bg-red-500 text-white rounded-full cursor-pointer">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of modal -->
     <div class="">
       <header class="container mx-auto my-10">
         <div class="flex  mx-5 justify-between items-center">
@@ -33,10 +55,7 @@
               <a href="./admin.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Admin</a>
               <a href="./vote.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Vote</a>
               <a href="./result.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Result</a>
-              <a
-              href="#"
-              style="font-size: 12px;"
-              id="wallet-address"
+              <a href="#" style="font-size: 12px;" id="wallet-address"
                 class="font-sans text-sm font md:mx-3 py-2 px-5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full cursor-pointer">
                 wallet-address
               </a>
@@ -46,12 +65,13 @@
       </header>
 
       <main class="">
+        <!-- status bar -->
         <section class="container w-3/4 mx-auto text-white p-5">
-          <div class="flex justify-between items-center align-middle">
-            <div class="mx-3 mt-6">Candidate: 3</div>
-            <div class="mx-3 mt-6">Board of directors: 3</div>
-            <div class="mx-3 mt-6">Students</div>
-            <div class="mx-3 mt-6">Teachers: 3</div>
+          <div class="flex justify-between items-center align-middle" id="status">
+            <div class="mx-3 mt-6" id="candidateCount">Candidate: 0</div>
+            <div class="mx-3 mt-6" id="BODCount">Board of directors: 0</div>
+            <div class="mx-3 mt-6" id="studentCount">Students: 0</div>
+            <div class="mx-3 mt-6" id="teacherCount">Teachers: 0</div>
             <div class="flex justify-between">
               <div class="mx-3 flex flex-col justify-center items-center">
                 <div class="p-1 h-6 w-12 shadow-md bg-red-600 border-red-400" id="voting-status"></div>
@@ -64,18 +84,18 @@
             </div>
           </div>
         </section>
+        <!-- end of status bar -->
 
         <section class="w-4/5 mx-auto">
           <div class="grid grid-cols-2 items-center my-32 gap-8 text-white">
             <!-- form 1 -->
             <div id="form1">
-              <h3 class="text-2xl font-sans">Create Candidate Profile</h3>
+              <h3 class="text-3xl text-bold font-heading font-medium">Create Candidate Profile</h3>
               <p class="text-sm font-thin">Restricted to Chairman, Board of Directors and Teachers.</p>
               <form action="#candidateForm" class="w-4/5" id="form-addCandidates">
                 <div class="my-5">
                   <input type="text" class="rounded-full w-full px-4 py-2 block w-100 bg-zinc-800"
-                    placeholder="FirstName"
-                    id="input-firstname">
+                    placeholder="FirstName" id="input-firstname">
                 </div>
                 <div class="my-5">
                   <input type="text" class="rounded-full w-full px-4 py-2 block w-100 bg-zinc-800"
@@ -94,8 +114,7 @@
                   </label>
                 </div>
                 <div class="my-14">
-                  <button for="addFile"
-                    id="btn-addCandidate"
+                  <button for="addFile" id="btn-addCandidate"
                     class="block rounded-full w-full text-center hover:bg-red-500 border-red-400 px-8 py-2 bg-red-600">
                     Add Candidate
                   </button>
@@ -108,7 +127,7 @@
             <!-- form 2 -->
             <div id="form2">
               <div class="w-4/5 ml-14">
-                <h3 class="text-2xl font-sans">Open/Close Voting Portal</h3>
+                <h3 class="text-3xl text-bold font-heading font-medium">Open/Close Voting Portal</h3>
                 <p class="text-sm font-thin">Restricted to Chairman</p>
                 <form action="#candidateForm">
                   <div class="my-8">
@@ -117,12 +136,10 @@
                   </div>
                   <div class="w-3/4 my-5">
                     <div class="grid grid-cols-2 gap-4">
-                      <button type="button"
-                        id="btn-voting-open"
+                      <button type="button" id="btn-voting-open"
                         class="rounded-full w-full px-4 py-2 block w-100 bg-green-600 hover:bg-green-500 border-green-400">Open
                         Voting</button>
-                      <button type="button"
-                        id="btn-voting-close"
+                      <button type="button" id="btn-voting-close"
                         class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400">Close
                         Voting</button>
                     </div>
@@ -130,7 +147,7 @@
                 </form>
 
                 <div class=" mt-7">
-                  <h3 class="text-2xl font-sans">Open/Close Results Portal</h3>
+                  <h3 class="text-3xl text-bold font-heading font-medium">Open/Close Results Portal</h3>
                   <p class="text-sm font-thin">Restricted to Chairman</p>
                   <form action="#candidateForm">
                     <div class="my-8">
@@ -140,10 +157,12 @@
                     <div class="w-3/4 my-5">
                       <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-2 sm:grid-cols-1 gap-4">
                         <button type="button"
-                          class="rounded-full w-full px-4 py-2 block w-100 bg-green-600 hover:bg-green-500 border-green-400" id="btn-result-open">Open
+                          class="rounded-full w-full px-4 py-2 block w-100 bg-green-600 hover:bg-green-500 border-green-400"
+                          id="btn-result-open">Open
                           Result</button>
                         <button type="button"
-                          class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400" id="btn-result-close">Close
+                          class="rounded-full w-full px-4 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400"
+                          id="btn-result-close">Close
                           Result</button>
                       </div>
                     </div>
@@ -151,22 +170,24 @@
                 </div>
 
                 <div class=" mt-7">
-                  <h3 class="text-2xl font-sans">Add Stake Holders</h3>
-                  <!-- <p class="text-sm font-thin">Restricted to Chairman</p> -->
+                  <h3 class="text-3xl text-bold font-heading font-medium">Add Stake Holders</h3>
+                  <p class="text-sm font-thin">Restricted to Chairman</p>
                   <form action="#candidateForm">
                     <div class="my-8">
                       <input type="text" class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
-                        placeholder="Input address">
-                        <label for="roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select Role</label>
-                          <select id="roles" class="ronded-full bg-zinc-800 border text-white text-sm rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-zinc-500 dark:focus:border-zinc-500">
-                            <option>Student</option>
-                            <option>Teacher</option>
-                            <option>Board of Directors</option>
-                          </select>
-                        </div>
+                        placeholder="Input address" id="input-address">
+                      <label for="roles" class="block my-5 text-sm font-medium text-zinc-400">Select Role</label>
+                      <select id="roles"
+                        class="bg-zinc-800 text-white text-sm rounded-full px-3 focus:ring-zinc-500 focus:rounded-full focus:border-zinc-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-zinc-500 dark:focus:border-zinc-500">
+                        <option value="2">Student</option>
+                        <option value="1">Teacher</option>
+                        <option value="0">Board of Directors</option>
+                      </select>
+                    </div>
                     <div class="my-5">
                       <div class="flex justify-center items-center">
                         <button type="button"
+                          id="btn-addStakeholder"
                           class="rounded-full px-14 py-2 block w-100 bg-red-600 hover:bg-red-500 border-red-400">
                           Add StakeHolder</button>
                       </div>
