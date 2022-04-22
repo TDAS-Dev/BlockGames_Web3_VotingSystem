@@ -400,7 +400,7 @@ async function displayCandidatesOnScreen() {
 
   let counter = candidatesArray.length;
   console.log(counter);
-  
+
   document.getElementById("candidate-list").innerHTML = `
         <div class="cursor-pointer rounded-sm">
         <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
@@ -434,9 +434,4 @@ async function displayCandidatesOnScreen() {
           </div>
         </div>
   `;
-}
-
-function mapper(val) {
-  const [id, name, addr, totalVotes, vBod, vT, vS, vC] = val;
-  return { id, name, addr, totalVotes, vBod, vT, vS, vC };
 }
