@@ -5,6 +5,10 @@
 https://lambent-banoffee-332cea.netlify.app/
 
 
+## Deployed Contract Address
+https://rinkeby.etherscan.io/address/0xcce3556f422f011dbf3f9782d177ee219ea011de
+
+
 to do list
 1. finish integration---- tega and harbiola and Diac
 2. add comments --- david
