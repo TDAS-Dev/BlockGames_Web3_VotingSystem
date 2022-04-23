@@ -421,11 +421,33 @@ function loopTable(array) {
 
 // return user to homepage if result is not active
 if (getStateData("votingStatus") === false) {
-  document.getElementById("modal").classList.replace("hidden", "grid");
-  document.getElementById("modal-header").innerHTML = "Result is not active";
-  document.getElementById(
-    "modal-body"
-  ).innerHTML = `You will be redirected back to homepage in 5 seconds checkback later when result are opened`;
+  function secondsCounter() {
+    let count = 0;
+    let counter = setInterval(() => {
+      count++;
+      console.log("count: ", count);
+      document.getElementById("modal").classList.replace("hidden", "grid");
+      document.getElementById(
+        "modal-header"
+      ).innerHTML = `Result is not active`;
+      document.getElementById("modal-header").innerHTML =
+        "Result is not active";
+      document.getElementById(
+        "modal-body"
+      ).innerHTML = `You will be redirected back to homepage in ${count} seconds checkback later when result are opened`;
+
+      if (count === 5) {
+        document.getElementById(
+          "modal-body"
+        ).innerHTML = `redirecting to homepage`;
+  
+        clearInterval(1);
+      }
+    }, 1000);
+    return counter;
+  }
+  secondsCounter()
+
   setTimeout(() => {
     window.location.replace("../index.html");
   }, 5000);
