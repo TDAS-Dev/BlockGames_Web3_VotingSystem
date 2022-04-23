@@ -419,4 +419,16 @@ function loopTable(array) {
     .join("");
 }
 
+// return user to homepage if result is not active
+if (getStateData("votingStatus") === false) {
+  document.getElementById("modal").classList.replace("hidden", "grid");
+  document.getElementById("modal-header").innerHTML = "Result is not active";
+  document.getElementById(
+    "modal-body"
+  ).innerHTML = `You will be redirected back to homepage in 5 seconds checkback later when result are opened`;
+  setTimeout(() => {
+    window.location.replace("../index.html");
+  }, 5000);
+}
+
 console.info("result");
