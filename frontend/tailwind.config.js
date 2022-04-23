@@ -12,5 +12,7 @@ module.exports = {
       robo: ["Roboto", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-tables')(),
+  ],
 };

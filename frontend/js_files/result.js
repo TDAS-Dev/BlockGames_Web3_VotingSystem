@@ -371,8 +371,8 @@ async function displayCandidatesOnScreen() {
 
   //@abiola start from here
   candidatesArray.length && loopCandidate(candidatesArray);
+  candidatesArray.length && loopTable(candidatesArray);
 }
-// <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
 
 function loopCandidate(array) {
   document.getElementById("result list").innerHTML = array
@@ -382,9 +382,28 @@ function loopCandidate(array) {
       <img src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067" alt="voters image" class="h-52 w-52">
       <div class="bg-zinc-700 text-center w-52">
       <h1 class="text-lg font-bold">ID: ${candidate[0]}</h1>
-      <p class="font-sans font-light">${candidate[1]}</p>
+      <p class="font-sans font-light">Name: ${candidate[1]}</p>
       </div>
       </div>
+      `
+    )
+    .join("");
+}
+function loopTable(array) {
+  document.getElementById("count-result").innerHTML = array
+    .map(
+      (candidate) =>
+        `
+        <tr>
+          <th scope="row">${candidate[0]}</th>
+          <td>${candidate[1]}</td>
+          <td>${candidate[2]}</td>
+          <td>${candidate[3]}</td>
+          <td>${candidate[4]}</td>
+          <td>${candidate[5]}</td>
+          <td>${candidate[6]}</td>
+          <td>${candidate[7]}</td>
+      </tr>
       `
     )
     .join("");
