@@ -19,6 +19,7 @@ async function login() {
         setState("account", user.get("ethAddress"));
         document.getElementById("walletAddressButton").innerHTML =
           user.get("ethAddress");
+        setModal();
       })
       .catch(function (error) {
         console.log(error);
@@ -38,7 +39,7 @@ document.getElementById("btn-logout").onclick = logOut;
 //LOCAL STORAGE TRYOUT
 
 function setState(key, params) {
-  let stateData = localStorage.setItem(key, JSON.stringify(params));
+  localStorage.setItem(key, JSON.stringify(params));
   getStateData(key);
 }
 
@@ -57,7 +58,6 @@ if (getStateData("account")) {
   document.getElementById("walletAddressButton").innerHTML =
     getStateData("account");
 }
-document.getElementById("modal").onload = setModal;
 
 function setModal() {
   if (getStateData("account")) {
@@ -67,3 +67,10 @@ function setModal() {
       "Your Connection to metamask was successful";
   }
 }
+
+document.getElementById("close").onclick = function () {
+  document.getElementById("modal").classList.replace("grid", "hidden");
+};
+document.getElementById("closeBtn").onclick = function () {
+  document.getElementById("modal").classList.replace("grid", "hidden");
+};
