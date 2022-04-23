@@ -420,7 +420,7 @@ function loopTable(array) {
 }
 
 // return user to homepage if result is not active
-if (getStateData("votingStatus") === false) {
+if (getStateData("resultStatus") === false) {
   function secondsCounter() {
     let count = 0;
     let counter = setInterval(() => {
@@ -440,13 +440,13 @@ if (getStateData("votingStatus") === false) {
         document.getElementById(
           "modal-body"
         ).innerHTML = `redirecting to homepage`;
-  
+
         clearInterval(1);
       }
     }, 1000);
     return counter;
   }
-  secondsCounter()
+  secondsCounter();
 
   setTimeout(() => {
     window.location.replace("../index.html");
