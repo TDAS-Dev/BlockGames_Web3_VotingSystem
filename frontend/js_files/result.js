@@ -47,6 +47,16 @@ const ABI = [
   },
   {
     inputs: [
+      { internalType: "address[]", name: "_addressArray", type: "address[]" },
+      { internalType: "uint256", name: "_role", type: "uint256" },
+    ],
+    name: "createMultipleStakeHolders",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       { internalType: "address", name: "_address", type: "address" },
       { internalType: "uint256", name: "_role", type: "uint256" },
     ],
@@ -205,7 +215,7 @@ const ABI = [
 ];
 const CHAIN = "rinkeby";
 // const CONTRACTADDRESS = "0xd39f7640739b1AF36d223709C5442e4944595ea1";
-const CONTRACTADDRESS = "0xCcE3556F422F011dbf3F9782d177Ee219eA011dE";
+const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
 
 async function login() {
   let user = Moralis.User.current();
