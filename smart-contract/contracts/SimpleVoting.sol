@@ -133,10 +133,10 @@ contract SimpleVoting {
 
     //new function to allow chairman transfer his rights
     function transferChairman (address _address) public onlyByChairman {
-        require (!isABOD(_address), "Only BODs can be a chairman");
+        require (isABOD(_address), "Only BODs can be a chairman");
         chairman = _address;
-        stakeholders[_address].Role = 3; //change role of new chairman
-        stakeholders[msg.sender].Role = 0; //change role of old chairman
+        stakeholders[_address].role = Role(3); //change role of new chairman
+        stakeholders[msg.sender].role = Role(0); //change role of old chairman
     }
 
     /// @notice create a stakeholder
@@ -236,7 +236,7 @@ contract SimpleVoting {
         return stakeholdersList;
     }
 
-    function getListOfStakeHoldersObjects() public view returns (address[] memory) {
+    function getListOfStakeHoldersObjects() public view returns (Stakeholder[] memory) {
         return stakeholderObject;
     }
 
