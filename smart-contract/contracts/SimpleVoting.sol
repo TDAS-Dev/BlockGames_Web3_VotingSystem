@@ -139,6 +139,10 @@ contract SimpleVoting {
         stakeholders[msg.sender].role = Role(0); //change role of old chairman
     }
 
+    function getCurrentChairmanAddress() public view returns (address) {
+        return chairman;
+    }
+
     /// @notice create a stakeholder
     /// @dev initialize the stakeholders mapping to roles and push them into their respective arrays
     /// @param _address The address of the impending stakeholder
