@@ -20,7 +20,7 @@ contract SimpleVoting {
 
     /// @notice Public Variable to look up the addresses of stakeholders
     /// @dev mapping to lookup address in the stakeholder struct
-    mapping(address => Stakeholder) public stakeholders; 
+    mapping (address => Stakeholder) public stakeholders; 
     
     /// @notice Public Variable to store list of all stakeholders that have been registered
     /// @dev an array of all the stakeholder addresses
@@ -47,6 +47,9 @@ contract SimpleVoting {
         CHAIRMAN
     } 
 
+
+    Stakeholder[] public stakeholderObject; 
+
     /// @notice a way to store details of each stakeholder
     /// @dev a struct to store the details of each stakeholder
     /// @param role a variable to store the role of type enum 
@@ -57,10 +60,10 @@ contract SimpleVoting {
         Role role;
         bool hasVoted; 
         uint256 candidateChosen; 
-        address registeredAddress; 
+        address registeredAddress;
+        address stakeholderAddress;
     } 
 
-    
     /// @notice a list of all candidates registered by the chairman
     /// @dev an array of all the candidates
     Candidate[] public candidatesList; 
@@ -125,6 +128,15 @@ contract SimpleVoting {
         votingActive = false;
         resultsActive = false;
         createStakeHolder(msg.sender, 3); //add the chairperson as a stakeholder
+        BODList.push(msg.sender); //add the chairperson to the BOD LIST
+    }
+
+    //new function to allow chairman transfer his rights
+    function transferChairman (address _address) public onlyByChairman {
+        require (!isABOD(_address), "Only BODs can be a chairman");
+        chairman = _address;
+        stakeholders[_address].Role = 3; //change role of new chairman
+        stakeholders[msg.sender].Role = 0; //change role of old chairman
     }
 
     /// @notice create a stakeholder
@@ -135,8 +147,14 @@ contract SimpleVoting {
         public
         onlyByChairman
     {
-        stakeholders[_address] = Stakeholder(Role(_role), false, 8, msg.sender); //add stakeholders to the mapping
-        stakeholdersList.push(_address); // add stakeholder's adress to the list of stakeHolders addresses
+        require(!isAStakeholder(_address), "This address is already registered");
+        //add stakeholders to the mapping
+        stakeholders[_address] = Stakeholder(Role(_role), false, 8, msg.sender, _address); 
+        //add stakeholders to the array that holds all structs of stakeholders
+        stakeholderObject.push(stakeholders[_address]); 
+        // add stakeholder's adress to the list of stakeHolders addresses
+        stakeholdersList.push(_address); 
+        //add stakeholder's adress to the corresponding list based on roles
         if (stakeholders[_address].role == Role(0)) {
             BODList.push(_address);
         }
@@ -175,6 +193,15 @@ contract SimpleVoting {
         return false;
     }
 
+    function isABOD(address _address) public view returns (bool) {
+        for (uint8 i = 0; i < BODList.length; i++) {
+            if (_address == BODList[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /// @notice create a candidate
     /// @dev a function to add a candidate
     /// @param _candidateName The name of the impending candidate
@@ -207,6 +234,10 @@ contract SimpleVoting {
     /// @return address[] returns an array of addresses
     function getListOfStakeHolders() public view returns (address[] memory) {
         return stakeholdersList;
+    }
+
+    function getListOfStakeHoldersObjects() public view returns (address[] memory) {
+        return stakeholderObject;
     }
 
     /// @notice get list of teachers
