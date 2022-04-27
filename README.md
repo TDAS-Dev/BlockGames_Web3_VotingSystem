@@ -11,6 +11,10 @@ https://rinkeby.etherscan.io/address/0x251e18258e3fcdf32767afe05b5398d0e51fa6e9
 https://taupe-cobbler-b8dd77.netlify.app/
 
 
-TO DO LIST
+## TO DO LIST
 1. Redo documentation
-2. 
+2. Transfer of chairman
+3. Display Current chairman
+4. Upload multiple functionality
+5. Display all stockholders( new page or modal )
+6. Implemention of signature
