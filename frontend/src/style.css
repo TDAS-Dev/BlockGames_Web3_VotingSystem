@@ -2100,6 +2100,11 @@ th {
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
 
+.bg-zinc-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+}
+
 .bg-\[url\(\'\.\.\.\'\)\] {
   background-image: url('...');
 }
@@ -2522,6 +2527,11 @@ th {
 .text-red-100 {
   --tw-text-opacity: 1;
   color: rgb(254 226 226 / var(--tw-text-opacity));
+}
+
+.text-zinc-800 {
+  --tw-text-opacity: 1;
+  color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
 .underline {
