@@ -19,9 +19,9 @@ https://taupe-cobbler-b8dd77.netlify.app/
 3. Transfer of chairman Smart Contrract side ==> Tega "DONE"
 4. Transfer of chairman UI creation ==> Abiola (create 1 input field and a button) ==> Abiola
 5. Transfer of chairman hook up the functionality ==> Tega
-6. Display the address of Current chairman Create UI ==> Abiola
+6. Display the address of Current chairman Create UI ==> Abiola "Done"
 7. Display the address of Current chairman Smart Contrract side ==> Tega "DONE"
-8. Upload multiple functionality ===> Abiola / Diac
+8. Upload multiple functionality ===> Abiola "Done"
 9. Display all stackholders( new page or modal ) Create UI Side ===> Abiola / Diac
 10. Display all stackholders Smart Contrract side ==> Tega "DONE"
 11. Implemention of signature ===> David
