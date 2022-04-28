@@ -177,6 +177,7 @@ async function displayCandidatesOnScreen() {
   candidatesArray.length && loopTable(candidatesArray);
 }
 
+// Display the candidates on the screen
 function loopCandidate(array) {
   document.getElementById("result list").innerHTML = array
     .map(
