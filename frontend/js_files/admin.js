@@ -213,8 +213,8 @@ const ABI = [
   },
 ];
 const CHAIN = "rinkeby";
-// const CONTRACTADDRESS = "0xd39f7640739b1AF36d223709C5442e4944595ea1";
-const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
+const CONTRACTADDRESS = "0xd39f7640739b1AF36d223709C5442e4944595ea1";
+// const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
 
 async function login() {
   let user = Moralis.User.current();
@@ -532,11 +532,13 @@ async function createStakeHolder(address, role) {
 //ADD AND CREATE MULTIPLE STAKEHOLDERS
 //ADD AND CREATE MULTIPLE STAKEHOLDERS
 //function not properly functioning just yet
-document.getElementById("btn-multipleaddStakeholder").onclick =
-  addMultipleStakeholder;
+// -----------------------------------------------------------------
+// document.getElementById("btn-multipleaddStakeholder").onclick =
+//   addMultipleStakeholder;
 
 async function addMultipleStakeholder() {
-  const addressesArray = document.getElementById("input-address").value;
+  // const addressesArray = document.getElementById("input-address").value;
+  const addressesArray = getStateData("uploadAddress");
   // const addressesArray = `[${addresses}]`;
   const role = document.getElementById("roles").value;
   await createMultipleStakeHolders(addressesArray, role);
@@ -558,4 +560,57 @@ async function createMultipleStakeHolders(addresses, role) {
     },
   };
   return await Moralis.executeFunction(options);
+}
+
+// FUNCTIONALITY FOR UPLOADING EXCEL FILE
+// CONVERTING TO JSON
+// SETTING THE
+
+// select file
+let selectedFile;
+console.log(window.XLSX);
+document
+  .getElementById("stakeholder-upload")
+  .addEventListener("change", (event) => {
+    selectedFile = event.target.files[0];
+  });
+
+let data = [
+  {
+    name: "jayanth",
+    data: "scd",
+    abc: "sdef",
+  },
+];
+
+// add multiple stake holders button
+document.getElementById("btn-multipleaddStakeholder").onclick =
+  uploadStakeHolderFile;
+
+function uploadStakeHolderFile() {
+  document
+    .getElementById("btn-multipleaddStakeholder")
+    .addEventListener("click", () => {
+      XLSX.utils.json_to_sheet(data, "out.xlsx");
+      if (selectedFile) {
+        let fileReader = new FileReader();
+        fileReader.readAsBinaryString(selectedFile);
+        fileReader.onload = (event) => {
+          let data = event.target.result;
+          let workbook = XLSX.read(data, { type: "binary" });
+          console.log(workbook);
+          workbook.SheetNames.forEach((sheet) => {
+            let rowObject = XLSX.utils.sheet_to_row_object_array(
+              workbook.Sheets[sheet]
+            );
+            localStorage.removeItem("uploadAddress");
+            console.info("removing previous upload...");
+            console.info("downloading new upload");
+            setState("uploadAddress", rowObject);
+            console.info("upload download completed successfully");
+            console.log("result of upload", rowObject);
+          });
+        };
+      }
+    });
 }

@@ -21,6 +21,8 @@ contract SimpleVoting {
     /// @notice Public Variable to look up the addresses of stakeholders
     /// @dev mapping to lookup address in the stakeholder struct
     mapping(address => Stakeholder) public stakeholders; 
+
+    // 0x76472839diofjisofu9rwewrio;of = 
     
     /// @notice Public Variable to store list of all stakeholders that have been registered
     /// @dev an array of all the stakeholder addresses
