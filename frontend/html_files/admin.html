@@ -22,11 +22,13 @@
   <body class="bg-zinc-900 font-heading relative">
     <!-- modal div -->
     <div id="modal" class="hidden transition-all place-items-center mx-auto container absolute z-auto w-100 h-100">
-      <div class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
+      <div
+        class="bg-zinc-100 rounded transition-opacity ease-in-out duration-1000 shadow-md w-100 lg:w-[40%] md:w-[40%] items-center mt-[20%] text-zinc-900 p-5">
         <div id="modal-content" class="">
           <div id="modal-header" class="flex justify-between items-center py-2">
             <h2 id="modal-title"></h2>
-            <span id="close" class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
+            <span id="close"
+              class="text-zinc-500 font-sans font-medium text-xl hover:text-zinc-900 cursor-pointer">close</span>
           </div>
           <div class="border border-zinc-200 shadow-sm"></div>
           <div id="modal-body" class="px-3 py-10">
@@ -121,9 +123,25 @@
                 </div>
               </form>
 
-              <!-- stake holder -->
-              
-              <!-- stake holder emd -->
+              <!-- Transfer ownership -->
+              <div class="w-4/5">
+                <h3 class="text-3xl text-bold font-heading font-medium">Transfer ownership</h3>
+                <p class="text-sm font-thin">Restricted to Chairman</p>
+                <form action="#transferForm">
+                  <div class="my-8">
+                    <input type="text" class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
+                      placeholder="Input address" id="newOwnership-address">
+                  </div>
+                  <div class="my-14">
+                    <button for="addFile" id="btn-addCandidate"
+                      class="block rounded-full w-full text-center hover:bg-red-500 border-red-400 px-8 py-2 bg-red-600">
+                      Transfer ownership
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- transfer ownership emd -->
             </div>
 
 
@@ -179,6 +197,9 @@
                     <div class="my-8">
                       <input type="text" class="rounded-full w-full block w-100 px-4 py-2 bg-zinc-800"
                         placeholder="Input address" id="input-address">
+                        <br>
+                      <input type="file" class="rounded-full w-full block w-100 px-4 py-2 mt-3 bg-zinc-800"
+                        placeholder="Input address" id="stakeholder-upload" accept=".xls,.xlsx">
                       <label for="roles" class="block my-5 text-sm font-medium text-zinc-400">Select Role</label>
                       <select id="roles"
                         class="bg-zinc-800 text-white text-sm rounded-full px-3 focus:ring-zinc-500 focus:rounded-full focus:border-zinc-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-zinc-500 dark:focus:border-zinc-500">
@@ -190,12 +211,12 @@
                     <div class="w-100 my-5">
                       <div class="grid grid-cols-2 gap-4">
                         <button type="button" id="btn-addStakeholder"
-                          class="rounded-full w-full px-4 py-1 text-sm block w-100 bg-red-600 hover:bg-red-500 border-green-400">
+                          class="rounded-full w-full px-4 py-2 text-sm block w-100 bg-red-600 hover:bg-red-500 border-green-400">
                           Add StakeHolder
                         </button>
                         <button type="button" id="btn-multipleaddStakeholder"
-                          class="rounded-full w-full px-4 py-1 text-sm block w-100 bg-red-600 hover:bg-red-500 border-red-400">
-                         Add Multiple Stakeholder
+                          class="rounded-full w-full px-4 py-2 text-sm block w-100 bg-red-600 hover:bg-red-500 border-red-400">
+                          Add Multiple Stakeholder
                         </button>
                       </div>
                     </div>
@@ -209,7 +230,7 @@
       </main>
 
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <script src="../js_files/admin.js"></script>
   </body>
 
