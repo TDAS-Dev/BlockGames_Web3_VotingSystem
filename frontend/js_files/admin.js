@@ -434,3 +434,28 @@ async function displayChairmanAddress() {
   console.log('current chiarman address',chairmanAddress)
 }
 displayChairmanAddress()
+
+// Transfer Chairman
+document.getElementById("btn-transferChairman").onclick = transferChairman;
+
+async function transferChairman() {
+  const newChairmanAddress = document.getElementById("newOwnership-address").value;
+  await transferChairmanAddress(newChairmanAddress);
+  document.getElementById("modal").classList.replace("hidden", "grid");
+  document.getElementById("modal-header").innerHTML = "Successful";
+  document.getElementById("modal-body").innerHTML = "Chairman transferred";
+}
+
+async function transferChairmanAddress() {
+  await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+  const options = {
+    chain: CHAIN,
+    contractAddress: CONTRACTADDRESS,
+    functionName: "transferChairman",
+    abi: ABI,
+    params: {
+      _newChairmanAddress: newChairmanAddress,
+    },
+  };
+  return await Moralis.executeFunction(options);
+}

@@ -24,7 +24,7 @@ https://taupe-cobbler-b8dd77.netlify.app/
 8. Upload multiple functionality ===> Abiola "Done"
 9. Display all stackholders( new page or modal ) Create UI Side ===> Abiola / Diac
 10. Display all stackholders Smart Contrract side ==> Tega "DONE"
-11. Implemention of signature ===> David
+11. Implemention of signature ===> David 
 12. Write extra tests ==>(at lest 25 tests) ==> Diac
 13. Write Coverage tests ==> Abiola and Diac
 
