@@ -403,6 +403,7 @@ function uploadStakeHolderFile() {
 
             console.info("downloading new upload");
             console.log("result of upload", rowObject);
+            // pull address and push into an array
             rowObject.forEach((addr) => {
               console.log(addr.address);
               addressArray.push(addr.address);
@@ -415,3 +416,21 @@ function uploadStakeHolderFile() {
       }
     });
 }
+
+// Display chairman address
+async function getChairmanAddress() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getCurrentChairmanAddress", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
+}
+
+async function displayChairmanAddress() {
+  const chairmanAddress = await getChairmanAddress();
+  document.getElementById("chairman-address").innerHTML = chairmanAddress;
+  console.log('current chiarman address',chairmanAddress)
+}
+displayChairmanAddress()
