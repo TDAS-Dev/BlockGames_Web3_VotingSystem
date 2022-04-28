@@ -464,28 +464,4 @@ async function transferChairmanAddress(newChairmanAddress) {
   return await Moralis.executeFunction(options);
 }
 
-// // List of stake Holder Object
-// async function getStakeHoldersList() {
-//    await Moralis.authenticate({ signingMessage: "Log in using Moralis" });
-//   const options = {
-//     chain: CHAIN,
-//     contractAddress: CONTRACTADDRESS,
-//     function_name: "getListOfStakeHoldersObjects",
-//     abi: ABI,
-//   };
-//   // return await Moralis.Web3API.native.runContractFunction(options);
-//   return await Moralis.executeFunction(options);
-// }
 
-// // function to handle getStakeHolderList
-// const getStakerList = async () => {
-//   const stakeHoldersList = await getStakeHoldersList();
-//   console.log("stakeHoldersList", stakeHoldersList);
-//   const stakeHolderList = stakeHoldersList.map((stakeHolder) => {
-//     console.table(stakeHolder);
-//     return stakeHolder.toString();
-//   });
-//   console.log("stakeHolderList", stakeHolderList);
-//   return stakeHolderList;
-// };
-// getStakerList();
