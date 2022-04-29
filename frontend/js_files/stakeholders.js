@@ -393,29 +393,54 @@ async function logOut() {
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 
-if (getStateData("votingStatus")) {
-  document.getElementById("voting-status").style.backgroundColor = "green";
-  document.getElementById("votingStatusText").innerHTML = "Voting Active";
+
+async function getResultState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getResultState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
 }
 
-if (!getStateData("votingStatus")) {
-  document.getElementById("voting-status").style.backgroundColor = "red";
-  document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+async function resultStatus() {
+  let result = await getResultState();
+  if (result === true) {
+    document.getElementById("result-status").classList.add("bg-green-500");
+    document.getElementById("resultStatusText").innerHTML = "Voting Active";
+    console.log("getResultState is", result);
+  } else {
+    document.getElementById("result-status").classList.add("bg-red-500");
+    document.getElementById("resultStatusText").innerHTML = "Voting Inactive";
+    console.log("getResultState is", result);
+  }
+}
+resultStatus();
+
+// vote status
+async function getVotingState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getVotingState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
 }
 
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-
-if (getStateData("resultStatus")) {
-  document.getElementById("result-status").style.backgroundColor = "green";
-  document.getElementById("resultStatusText").innerHTML = "Result Active";
+async function voteStatus() {
+  let result = await getVotingState();
+  if (result === true) {
+    document.getElementById("voting-status").classList.add("bg-green-500");
+    console.log("getVoteState is", result);
+  } else {
+    document.getElementById("voting-status").classList.add("bg-red-500");
+    console.log("getVoteState is", result);
+  }
 }
+voteStatus();
 
-if (!getStateData("resultStatus")) {
-  document.getElementById("result-status").style.backgroundColor = "red";
-  document.getElementById("resultStatusText").innerHTML = "Result Inactive";
-}
 
 //STATE MANAGEMENT FUNCTIONS
 //STATE MANAGEMENT FUNCTIONS

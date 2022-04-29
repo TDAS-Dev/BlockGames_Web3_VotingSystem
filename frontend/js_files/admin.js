@@ -413,10 +413,28 @@ function displayVotingStatusActive() {
   document.getElementById("modal-body").innerHTML = "Voting is now active";
 }
 
-if (getStateData("votingStatus")) {
-  document.getElementById("voting-status").style.backgroundColor = "green";
-  document.getElementById("votingStatusText").innerHTML = "Voting Active";
+// vote status
+async function getVotingState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getVotingState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
 }
+
+async function votingStatus() {
+  let result = await getVotingState();
+  if (result) {
+    document.getElementById("voting-status").style.backgroundColor = "green";
+    document.getElementById("votingStatusText").innerHTML = "Voting Active";
+  } else {
+    document.getElementById("voting-status").style.backgroundColor = "red";
+    document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+  }
+}
+votingStatus()
 
 async function votingClose(e) {
   e.preventDefault();
@@ -434,11 +452,6 @@ function displayVotingStatusInactive() {
   document.getElementById("modal").classList.replace("hidden", "grid");
   document.getElementById("modal-title").innerHTML = "Voting is disabled";
   document.getElementById("modal-body").innerHTML = "Voting is NOT active";
-}
-
-if (!getStateData("votingStatus")) {
-  document.getElementById("voting-status").style.backgroundColor = "red";
-  document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
 }
 
 async function toggleVoting() {
@@ -477,10 +490,27 @@ function displayResultsStatusActive() {
     "Students can now view result of voting";
 }
 
-if (getStateData("resultStatus")) {
-  document.getElementById("result-status").style.backgroundColor = "green";
-  document.getElementById("resultStatusText").innerHTML = "Result Active";
+async function getResultState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getResultState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
 }
+
+async function resultState() {
+let result = await getResultState();
+  if (result) {
+    document.getElementById("result-status").style.backgroundColor = "green";
+    document.getElementById("resultStatusText").innerHTML = "Result Active";
+  } else {
+    document.getElementById("result-status").style.backgroundColor = "red";
+    document.getElementById("resultStatusText").innerHTML = "Result Inactive";
+  }
+}
+resultState();
 
 async function resultClose(e) {
   e.preventDefault();
@@ -500,11 +530,6 @@ function displayResultsStatusInactive() {
   document.getElementById("modal-title").innerHTML = "Result is disabled";
   document.getElementById("modal-body").innerHTML =
     "Students cannot view results anymore";
-}
-
-if (!getStateData("resultStatus")) {
-  document.getElementById("result-status").style.backgroundColor = "red";
-  document.getElementById("resultStatusText").innerHTML = "Result Inactive";
 }
 
 async function toggleResult() {
