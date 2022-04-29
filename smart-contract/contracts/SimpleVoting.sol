@@ -303,6 +303,17 @@ contract SimpleVoting {
     }
 
     /****************************************
+    GET THE STATE OF VOTING AND RESULTS ACTIVE
+    *****************************************/  
+    function getVotingState() public view returns (bool) {
+        return votingActive;
+    } 
+
+    function getResultState() public view returns (bool) {
+        return resultsActive;
+    }
+
+    /****************************************
     ENABLE A STAKEHOLDER TO VOTE
     *****************************************/
 
