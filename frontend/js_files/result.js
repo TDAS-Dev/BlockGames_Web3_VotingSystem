@@ -396,9 +396,9 @@ if (!getStateData("votingStatus")) {
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 
 // set to false if voting has not been set in local storage
-  if (getStateData("resultStatus") === null){
-    setState("resultStatus", false)
-  }
+if (getStateData("resultStatus") === null) {
+  setState("resultStatus", false);
+}
 console.log(getStateData("resultStatus"));
 
 if (getStateData("resultStatus")) {
@@ -526,6 +526,7 @@ async function displayCandidatesOnScreen() {
   //@abiola start from here
   candidatesArray.length && loopCandidate(candidatesArray);
   candidatesArray.length && loopTable(candidatesArray);
+  candidatesArray.length && Winner(candidatesArray);
 }
 
 // Display the candidates on the screen
@@ -596,6 +597,30 @@ if (getStateData("resultStatus") === false) {
   setTimeout(() => {
     window.location.replace("../index.html");
   }, 5000);
+}
+
+// handle winner cancel button selection
+document.getElementById("cancle-btn").onclick = function (e) {
+  // console.log(e)
+  console.log("cancle-btn clicked");
+  document
+    .getElementById("winner-notification")
+    .classList.replace("grid", "hidden");
+};
+
+if (getStateData("resultStatus") == true) {
+  document
+    .getElementById("winner-notification")
+    .classList.replace("hidden", "grid");
+
+
+}
+
+function Winner(list) {
+  const winner = list.reduce((a, b) =>
+  a[3] > b[3] ? a : b
+  );
+  document.getElementById("winner-name").innerHTML = winner[1];
 }
 
 console.info("result");
