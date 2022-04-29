@@ -238,6 +238,20 @@ const ABI = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "getResultState",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getVotingState",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "address", name: "_address", type: "address" }],
     name: "isABOD",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
@@ -352,7 +366,7 @@ const ABI = [
 ];
 
 const CHAIN = "rinkeby";
-const CONTRACTADDRESS = "0x2BE529f503E8026C3539c3325ba83AAaB1D5Ba8F";
+const CONTRACTADDRESS = "0x633d84bF31FDDF3cd6ef82d268059C85cc12386b";
 // const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
 
 async function login() {
@@ -612,14 +626,10 @@ if (getStateData("resultStatus") == true) {
   document
     .getElementById("winner-notification")
     .classList.replace("hidden", "grid");
-
-
 }
 
 function Winner(list) {
-  const winner = list.reduce((a, b) =>
-  a[3] > b[3] ? a : b
-  );
+  const winner = list.reduce((a, b) => (a[3] > b[3] ? a : b));
   document.getElementById("winner-name").innerHTML = winner[1];
 }
 

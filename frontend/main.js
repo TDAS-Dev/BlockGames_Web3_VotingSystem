@@ -4,7 +4,7 @@ const appId = "AuH19PpSEOGZ1g2U08nV6tnNvgTkDMzaS8VqvjyI";
 Moralis.start({ serverUrl, appId });
 
 const CHAIN = "rinkeby";
-const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
+const CONTRACTADDRESS = "0x633d84bF31FDDF3cd6ef82d268059C85cc12386b";
 
 async function login() {
   let user = Moralis.User.current();
