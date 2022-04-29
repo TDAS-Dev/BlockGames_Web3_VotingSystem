@@ -395,35 +395,58 @@ async function logOut() {
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 
-if (getStateData("votingStatus")) {
-  document.getElementById("voting-status").style.backgroundColor = "green";
-  document.getElementById("votingStatusText").innerHTML = "Voting Active";
+async function getResultState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getResultState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
 }
 
-if (!getStateData("votingStatus")) {
-  document.getElementById("voting-status").style.backgroundColor = "red";
-  document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+async function resultStatus() {
+  let result = await getResultState();
+  if (result === true) {
+    document.getElementById("result-status").classList.add("bg-green-500");
+    document.getElementById("resultStatusText").innerHTML = "Voting Active";
+    console.log("getResultState is", result);
+  } else {
+    document.getElementById("result-status").classList.add("bg-red-500");
+    document.getElementById("resultStatusText").innerHTML = "Voting Inactive";
+    console.log("getResultState is", result);
+  }
 }
+resultStatus();
+
+// vote status
+async function getVotingState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getVotingState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
+}
+
+async function voteStatus() {
+  let result = await getVotingState();
+  if (result === true) {
+    document.getElementById("voting-status").classList.add("bg-green-500");
+    console.log("getVoteState is", result);
+  } else {
+    document.getElementById("voting-status").classList.add("bg-red-500");
+    console.log("getVoteState is", result);
+  }
+}
+voteStatus();
 
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 
 // set to false if voting has not been set in local storage
-if (getStateData("resultStatus") === null) {
-  setState("resultStatus", false);
-}
-console.log(getStateData("resultStatus"));
-
-if (getStateData("resultStatus")) {
-  document.getElementById("result-status").style.backgroundColor = "green";
-  document.getElementById("resultStatusText").innerHTML = "Result Active";
-}
-
-if (!getStateData("resultStatus")) {
-  document.getElementById("result-status").style.backgroundColor = "red";
-  document.getElementById("resultStatusText").innerHTML = "Result Inactive";
-}
 
 //STATE MANAGEMENT FUNCTIONS
 //STATE MANAGEMENT FUNCTIONS
@@ -536,6 +559,7 @@ async function displayCandidatesOnScreen() {
   const candidatesArray = await getListOfCandidates(); //this stores the candidates list inside the variable
   //you can console.log it to view the array
   console.log(candidatesArray);
+  console.log("candidatesArray length is: ", candidatesArray.length);
 
   //@abiola start from here
   candidatesArray.length && loopCandidate(candidatesArray);
@@ -580,38 +604,43 @@ function loopTable(array) {
 }
 
 // return user to homepage if result is not active
-if (getStateData("resultStatus") === false) {
-  function secondsCounter() {
-    let count = 0;
-    let counter = setInterval(() => {
-      count++;
-      console.log("count: ", count);
-      document.getElementById("modal").classList.replace("hidden", "grid");
-      document.getElementById(
-        "modal-header"
-      ).innerHTML = `Result is not active`;
-      document.getElementById("modal-header").innerHTML =
-        "Result is not active";
-      document.getElementById(
-        "modal-body"
-      ).innerHTML = `You will be redirected back to homepage in ${count} seconds checkback later when result are opened`;
+async function notActive() {
+  let result = await getResultState();
 
-      if (count === 5) {
+  if (result == false) {
+    function secondsCounter() {
+      let count = 0;
+      let counter = setInterval(() => {
+        count++;
+        console.log("count: ", count);
+        document.getElementById("modal").classList.replace("hidden", "grid");
+        document.getElementById(
+          "modal-header"
+        ).innerHTML = `Result is not active`;
+        document.getElementById("modal-header").innerHTML =
+          "Result is not active";
         document.getElementById(
           "modal-body"
-        ).innerHTML = `redirecting to homepage`;
+        ).innerHTML = `You will be redirected back to homepage in ${count} seconds checkback later when result are opened`;
 
-        clearInterval(1);
-      }
-    }, 1000);
-    return counter;
+        if (count === 5) {
+          document.getElementById(
+            "modal-body"
+          ).innerHTML = `redirecting to homepage`;
+
+          clearInterval(1);
+        }
+      }, 1000);
+      return counter;
+    }
+    secondsCounter();
+
+    setTimeout(() => {
+      window.location.replace("../index.html");
+    }, 5000);
   }
-  secondsCounter();
-
-  setTimeout(() => {
-    window.location.replace("../index.html");
-  }, 5000);
 }
+// notActive();
 
 // handle winner cancel button selection
 document.getElementById("cancle-btn").onclick = function (e) {
