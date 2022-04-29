@@ -6,7 +6,7 @@ https://lambent-banoffee-332cea.netlify.app/
 
 ## Deployed Contract Address
 
-https://rinkeby.etherscan.io/address/0x149392def0453cb2ad9cb7d785706e323ebfe892
+https://rinkeby.etherscan.io/address/0x633d84bf31fddf3cd6ef82d268059c85cc12386b
 
 ## Link to the code documentation
 
