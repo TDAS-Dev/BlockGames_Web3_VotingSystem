@@ -464,4 +464,3 @@ async function transferChairmanAddress(newChairmanAddress) {
   return await Moralis.executeFunction(options);
 }
 
-
