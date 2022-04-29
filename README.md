@@ -16,20 +16,17 @@ https://taupe-cobbler-b8dd77.netlify.app/
 
 1. Redo documentation at the end of the smart Contract ==> David
 2. Emmit events in the smart contract ===> David
-9. Display all stackholders( new page or modal ) Create UI Side ===> Abiola / Diac
-11. Implemention of signature ===> David
-12. Write extra tests ==>(at lest 25 tests) ==> Diac
-13. Write Coverage tests ==> Abiola and Diac
-
-
-
-13. Transfer of chairman Smart Contrract side ==> Tega "DONE"
-14. Transfer of chairman UI creation ==> Abiola (create 1 input field and a button) ==> Abiola "DONE"
-15. Display the address of Current chairman Create UI ==> Abiola "Done"
-16. Display the address of Current chairman Smart Contrract side ==> Tega "DONE"
-17. Upload multiple functionality ===> Abiola "Done"
-10. Display all stackholders Smart Contrract side ==> Tega "DONE"
-11. 3. Transfer of chairman hook up the functionality ==> Tega
+3. Display all stackholders( new page or modal ) Create UI Side ===> Abiola "Done"
+4. Implemention of signature ===> David
+5. Write extra tests ==>(at lest 25 tests) ==> Diac
+6. Write Coverage tests ==> Abiola and Diac
+7. Transfer of chairman Smart Contrract side ==> Tega "DONE"
+8. Transfer of chairman UI creation ==> Abiola (create 1 input field and a button) ==> Abiola "DONE"
+9. Display the address of Current chairman Create UI ==> Abiola "Done"
+10. Display the address of Current chairman Smart Contrract side ==> Tega "DONE"
+11. Upload multiple functionality ===> Abiola "Done"
+12. Display all stackholders Smart Contrract side ==> Tega "DONE"
+13. 3. Transfer of chairman hook up the functionality ==> Abiola "Done"
 
 
 
