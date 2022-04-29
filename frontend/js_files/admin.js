@@ -104,6 +104,7 @@ async function resultOpen(e) {
   const resultsActive = await toggleResult();
   if (resultsActive) {
     displayResultsStatusActive();
+    localStorage.removeItem("resultStatus");
     setState("resultStatus", true);
   }
 }
@@ -128,6 +129,7 @@ async function resultClose(e) {
   const resultsActive = await toggleResult();
   if (resultsActive) {
     displayResultsStatusInactive();
+    localStorage.removeItem("resultStatus");
     setState("resultStatus", false);
   }
 }
