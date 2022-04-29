@@ -201,8 +201,6 @@ async function getListOfStakeHoldersObjects() {
           <th scope="row">${index + 1}</td>
             <th>${role[candidate[0]]}</th> 
             <td>${candidate[4]}</td>
-            <td>${candidate[1]}</td>
-            <td>${candidate[2]}</td>
             <td>${candidate[3]}</td>
         </tr>
         `

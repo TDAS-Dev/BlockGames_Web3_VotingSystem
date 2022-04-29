@@ -55,7 +55,8 @@
             <div class="flex justify-around text-white items-center mx-12">
               <a href="./admin.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Admin</a>
               <a href="./vote.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Vote</a>
-              <a href="./result.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">Result</a>
+              <a href="./stakeholders.html" class="lg:mx-10 hover:text-red-500 mx-3 underline block">StakeHolders</a>
+              <a href="./result.html" class="lg:mx-10 text-red-500 mx-3 underline block">Result</a>
               <a href="#" style="font-size: 12px;" id="wallet-address"
                 class="font-sans text-sm font md:mx-3 py-2 px-5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full cursor-pointer">
                 wallet-address
@@ -88,6 +89,15 @@
         </section>
         <!-- end of status bar -->
 
+        <section id="winner-notification" class="hidden">
+          <div
+            class="relative bg-green-100 text-green-900 text-center p-10 rounded-md shadow-lg mx-auto w-1/2 border-green 500 text-2xl">
+            <h1>The Winner of the Election is <b id="winner-name">Abiola</b></h1>
+            <span id="cancle-btn"
+              class="absolute top-0 right-0 text-green-900 font-semibold p-3 text-2xl cursor-pointer">&times;</span>
+          </div>
+        </section>
+
         <section class="w-4/5 mx-auto">
           <div class=" mt-14 text-white">
             <h3 class="text-2xl font-sans">Results</h3>
@@ -95,60 +105,6 @@
 
           </div>
           <div class="grid grid-cols-1 md:grid-cols-4 my-32 gap-8 text-white" id="result list">
-
-            <div>
-              <div class="cursor-pointer rounded-sm">
-                <img
-                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
-                  alt="voters image" srcset="" class="h-52 w-52">
-                <div class="bg-zinc-700 text-center w-52">
-                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
-                  <p class="font-sans font-light">Change and Positivity</p>
-                  <hr>
-                  <p class="text-center text-sm py-2 font-light">10 votes</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div class="cursor-pointer rounded-sm">
-                <img
-                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
-                  alt="voters image" srcset="" class="h-52 w-52">
-                <div class="bg-zinc-700 text-center w-52">
-                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
-                  <p class="font-sans font-light">Change and Positivity</p>
-                  <hr>
-                  <p class="text-center text-sm py-2 font-light">10 votes</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="cursor-pointer rounded-sm">
-                <img
-                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
-                  alt="voters image" srcset="" class="h-52 w-52">
-                <div class="bg-zinc-700 text-center w-52">
-                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
-                  <p class="font-sans font-light">Change and Positivity</p>
-                  <hr>
-                  <p class="text-center text-sm py-2 font-light">10 votes</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="cursor-pointer rounded-sm">
-                <img
-                  src="https://img.freepik.com/free-photo/3d-rendering-male-character-profile-with-cream-hat-orange-polo-shirt-good-character-profile_477250-61.jpg?size=338&ext=jpg&ga=GA1.1.1906834557.1622206067"
-                  alt="voters image" srcset="" class="h-52 w-52">
-                <div class="bg-zinc-700 text-center w-52">
-                  <h1 class="text-lg font-bold">FirstName Lastname</h1>
-                  <p class="font-sans font-light">Change and Positivity</p>
-                  <hr>
-                  <p class="text-center text-sm py-2 font-light">10 votes</p>
-                </div>
-              </div>
-            </div>
 
           </div>
     </div>
@@ -171,16 +127,7 @@
             </tr>
           </thead>
           <tbody id="count-result">
-            <tr>
-              <th scope="row">1</th>
-              <td>Otto</td>
-              <td>0x756789dfghuj67890j</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>False</td>
-            </tr>
+
           </tbody>
         </table>
       </div>
