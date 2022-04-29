@@ -640,7 +640,7 @@ async function notActive() {
     }, 5000);
   }
 }
-// notActive();
+notActive();
 
 // handle winner cancel button selection
 document.getElementById("cancle-btn").onclick = function (e) {
