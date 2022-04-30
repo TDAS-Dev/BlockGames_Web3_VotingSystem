@@ -424,17 +424,20 @@ async function getVotingState() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
+votingStatus()
 async function votingStatus() {
-  let result = await getVotingState();
-  if (result) {
+  let getVote = await getVotingState();
+  if (getVote) {
     document.getElementById("voting-status").style.backgroundColor = "green";
     document.getElementById("votingStatusText").innerHTML = "Voting Active";
+    console.log("voting active", getVote);
   } else {
     document.getElementById("voting-status").style.backgroundColor = "red";
     document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+    console.log("voting not active", getVote);
   }
 }
-votingStatus()
+
 
 async function votingClose(e) {
   e.preventDefault();
@@ -500,17 +503,20 @@ async function getResultState() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
+resultState();
 async function resultState() {
-let result = await getResultState();
-  if (result) {
+let getResult = await getResultState();
+  if (getResult) {
     document.getElementById("result-status").style.backgroundColor = "green";
     document.getElementById("resultStatusText").innerHTML = "Result Active";
+    console.log("result active", getResult);
   } else {
     document.getElementById("result-status").style.backgroundColor = "red";
     document.getElementById("resultStatusText").innerHTML = "Result Inactive";
+    console.log("result not active", getResult);
   }
 }
-resultState();
+
 
 async function resultClose(e) {
   e.preventDefault();
@@ -543,9 +549,6 @@ async function toggleResult() {
 }
 
 //CREATE A CANDIDATE
-//CREATE A CANDIDATE
-//CREATE A CANDIDATE
-// document.getElementById("btn-addCandidate").onclick = addCandidate;
 document
   .getElementById("btn-addCandidate")
   .addEventListener("click", addCandidate);

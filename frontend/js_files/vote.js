@@ -391,32 +391,6 @@ async function logOut() {
 }
 
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
-
-async function getResultState() {
-  const options = {
-    chain: CHAIN, //update
-    address: CONTRACTADDRESS, //update
-    function_name: "getResultState", //check
-    abi: ABI,
-  };
-  return await Moralis.Web3API.native.runContractFunction(options);
-}
-
-async function resultStatus() {
-  let result = await getResultState();
-  if (result === true) {
-    document.getElementById("result-status").classList.add("bg-green-500");
-    document.getElementById("resultStatusText").innerHTML = "Voting Active";
-    console.log("getResultState is", result);
-  } else {
-    document.getElementById("result-status").classList.add("bg-red-500");
-    document.getElementById("resultStatusText").innerHTML = "Voting Inactive";
-    console.log("getResultState is", result);
-  }
-}
-resultStatus();
 
 // vote status
 async function getVotingState() {
@@ -429,23 +403,46 @@ async function getVotingState() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
-async function voteStatus() {
-  let result = await getVotingState();
-  if (result === true) {
-    document.getElementById("voting-status").classList.add("bg-green-500");
-    console.log("getVoteState is", result);
+// result status
+async function getResultState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getResultState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
+}
+
+votingStatus()
+async function votingStatus() {
+  let getVote = await getVotingState();
+  if (getVote) {
+    document.getElementById("voting-status").style.backgroundColor = "green";
+    document.getElementById("votingStatusText").innerHTML = "Voting Active";
+    console.log("voting active", getVote);
   } else {
-    document.getElementById("voting-status").classList.add("bg-red-500");
-    console.log("getVoteState is", result);
+    document.getElementById("voting-status").style.backgroundColor = "red";
+    document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+    console.log("voting not active", getVote);
   }
 }
-voteStatus();
 
+resultState();
+async function resultState() {
+let getResult = await getResultState();
+  if (getResult) {
+    document.getElementById("result-status").style.backgroundColor = "green";
+    document.getElementById("resultStatusText").innerHTML = "Result Active";
+    console.log("result active", getResult);
+  } else {
+    document.getElementById("result-status").style.backgroundColor = "red";
+    document.getElementById("resultStatusText").innerHTML = "Result Inactive";
+    console.log("result not active", getResult);
+  }
+}
 
 //STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-
 // implementation for keeping state
 function setState(key, params) {
   localStorage.setItem(key, JSON.stringify(params)); //setState
@@ -458,9 +455,6 @@ function getStateData(params) {
 }
 
 //DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-
 document.getElementById("close").onclick = function () {
   document.getElementById("modal").classList.replace("grid", "hidden");
 };
@@ -468,27 +462,21 @@ document.getElementById("closeBtn").onclick = function () {
   document.getElementById("modal").classList.replace("grid", "hidden");
 };
 
+
 //DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//@abiola
 if (getStateData("account")) {
   document.getElementById("wallet-address").innerHTML = getStateData("account");
 }
 
-//DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
 
+//DISPLAY AND UPDATE STATUS BAR
 updateStatusBar();
-
 async function updateStatusBar() {
   const candidatesArray = await getListOfCandidates();
   const BODArray = await getListOfBOD();
   const teachersArray = await getListOfTeachers();
   const studentsArray = await getListOfStudents();
 
-  // console.log(candidatesArray.length);
   document.getElementById(
     "candidateCount"
   ).innerHTML = `Candidate: ${candidatesArray.length}`;
@@ -544,11 +532,8 @@ async function getListOfStudents() {
 }
 
 //RUN THE VOTE FUNCTION
-//RUN THE VOTE FUNCTION
-//RUN THE VOTE FUNCTION
 
 document.getElementById("btn-vote").onclick = vote;
-
 async function vote() {
   const voterChoiceName = document.getElementById("input-voteChoice").value;
   await voteSC(voterChoiceName);
@@ -572,8 +557,6 @@ async function voteSC(voterChoiceName) {
   return await Moralis.executeFunction(options);
 }
 
-//DISPLAY THE CANDIDATES ON THE SCREEN
-//DISPLAY THE CANDIDATES ON THE SCREEN
 //DISPLAY THE CANDIDATES ON THE SCREEN
 
 //NOTE DISPLAY JUST CANDIDATE NAME, CANDIDATE ID AND A FAKE IMAGE

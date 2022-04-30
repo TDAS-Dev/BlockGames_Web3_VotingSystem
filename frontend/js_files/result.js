@@ -367,7 +367,6 @@ const ABI = [
 
 const CHAIN = "rinkeby";
 const CONTRACTADDRESS = "0x633d84bF31FDDF3cd6ef82d268059C85cc12386b";
-// const CONTRACTADDRESS = "0x251e18258E3FcDF32767AFe05b5398D0e51fA6E9";
 
 async function login() {
   let user = Moralis.User.current();
@@ -385,39 +384,11 @@ async function login() {
       });
   }
 }
-
+// logout
 async function logOut() {
   await Moralis.User.logOut();
   console.log("logged out");
 }
-
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
-
-async function getResultState() {
-  const options = {
-    chain: CHAIN, //update
-    address: CONTRACTADDRESS, //update
-    function_name: "getResultState", //check
-    abi: ABI,
-  };
-  return await Moralis.Web3API.native.runContractFunction(options);
-}
-
-async function resultStatus() {
-  let result = await getResultState();
-  if (result === true) {
-    document.getElementById("result-status").classList.add("bg-green-500");
-    document.getElementById("resultStatusText").innerHTML = "Voting Active";
-    console.log("getResultState is", result);
-  } else {
-    document.getElementById("result-status").classList.add("bg-red-500");
-    document.getElementById("resultStatusText").innerHTML = "Voting Inactive";
-    console.log("getResultState is", result);
-  }
-}
-resultStatus();
 
 // vote status
 async function getVotingState() {
@@ -430,28 +401,46 @@ async function getVotingState() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
-async function voteStatus() {
-  let result = await getVotingState();
-  if (result === true) {
-    document.getElementById("voting-status").classList.add("bg-green-500");
-    console.log("getVoteState is", result);
+// result status
+async function getResultState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getResultState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
+}
+
+votingStatus()
+async function votingStatus() {
+  let getVote = await getVotingState();
+  if (getVote) {
+    document.getElementById("voting-status").style.backgroundColor = "green";
+    document.getElementById("votingStatusText").innerHTML = "Voting Active";
+    console.log("voting active", getVote);
   } else {
-    document.getElementById("voting-status").classList.add("bg-red-500");
-    console.log("getVoteState is", result);
+    document.getElementById("voting-status").style.backgroundColor = "red";
+    document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+    console.log("voting not active", getVote);
   }
 }
-voteStatus();
 
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-
-// set to false if voting has not been set in local storage
+resultState();
+async function resultState() {
+let getResult = await getResultState();
+  if (getResult) {
+    document.getElementById("result-status").style.backgroundColor = "green";
+    document.getElementById("resultStatusText").innerHTML = "Result Active";
+    console.log("result active", getResult);
+  } else {
+    document.getElementById("result-status").style.backgroundColor = "red";
+    document.getElementById("resultStatusText").innerHTML = "Result Inactive";
+    console.log("result not active", getResult);
+  }
+}
 
 //STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-
 // implementation for keeping state
 function setState(key, params) {
   localStorage.setItem(key, JSON.stringify(params)); //setState

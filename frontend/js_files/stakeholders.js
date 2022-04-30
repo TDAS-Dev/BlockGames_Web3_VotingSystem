@@ -394,54 +394,6 @@ async function logOut() {
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
 
 
-async function getResultState() {
-  const options = {
-    chain: CHAIN, //update
-    address: CONTRACTADDRESS, //update
-    function_name: "getResultState", //check
-    abi: ABI,
-  };
-  return await Moralis.Web3API.native.runContractFunction(options);
-}
-
-async function resultStatus() {
-  let result = await getResultState();
-  if (result === true) {
-    document.getElementById("result-status").classList.add("bg-green-500");
-    document.getElementById("resultStatusText").innerHTML = "Voting Active";
-    console.log("getResultState is", result);
-  } else {
-    document.getElementById("result-status").classList.add("bg-red-500");
-    document.getElementById("resultStatusText").innerHTML = "Voting Inactive";
-    console.log("getResultState is", result);
-  }
-}
-resultStatus();
-
-// vote status
-async function getVotingState() {
-  const options = {
-    chain: CHAIN, //update
-    address: CONTRACTADDRESS, //update
-    function_name: "getVotingState", //check
-    abi: ABI,
-  };
-  return await Moralis.Web3API.native.runContractFunction(options);
-}
-
-async function voteStatus() {
-  let result = await getVotingState();
-  if (result === true) {
-    document.getElementById("voting-status").classList.add("bg-green-500");
-    console.log("getVoteState is", result);
-  } else {
-    document.getElementById("voting-status").classList.add("bg-red-500");
-    console.log("getVoteState is", result);
-  }
-}
-voteStatus();
-
-
 //STATE MANAGEMENT FUNCTIONS
 //STATE MANAGEMENT FUNCTIONS
 //STATE MANAGEMENT FUNCTIONS
@@ -477,11 +429,8 @@ if (getStateData("account")) {
 }
 
 //DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
 
 updateStatusBar();
-
 async function updateStatusBar() {
   const candidatesArray = await getListOfCandidates();
   const BODArray = await getListOfBOD();
@@ -553,6 +502,60 @@ async function getListOfStakeHoldersObjects() {
   return await Moralis.Web3API.native.runContractFunction(options);
 }
 
+// voting and result status
+
+// vote status
+async function getVotingState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getVotingState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
+}
+
+// result status
+async function getResultState() {
+  const options = {
+    chain: CHAIN, //update
+    address: CONTRACTADDRESS, //update
+    function_name: "getResultState", //check
+    abi: ABI,
+  };
+  return await Moralis.Web3API.native.runContractFunction(options);
+}
+
+votingStatus()
+async function votingStatus() {
+  let getVote = await getVotingState();
+  if (getVote) {
+    document.getElementById("voting-status").style.backgroundColor = "green";
+    document.getElementById("votingStatusText").innerHTML = "Voting Active";
+    console.log("voting active", getVote);
+  } else {
+    document.getElementById("voting-status").style.backgroundColor = "red";
+    document.getElementById("votingStatusText").innerHTML = "Voting Inactive";
+    console.log("voting not active", getVote);
+  }
+}
+
+resultState();
+async function resultState() {
+let getResult = await getResultState();
+  if (getResult) {
+    document.getElementById("result-status").style.backgroundColor = "green";
+    document.getElementById("resultStatusText").innerHTML = "Result Active";
+    console.log("result active", getResult);
+  } else {
+    document.getElementById("result-status").style.backgroundColor = "red";
+    document.getElementById("resultStatusText").innerHTML = "Result Inactive";
+    console.log("result not active", getResult);
+  }
+}
+// end of voting and result status
+
+// state holders lists
 async function displayListOfStakeHoldersObjects() {
   const ListOfStakeHoldersObjects = await getListOfStakeHoldersObjects();
   console.log(ListOfStakeHoldersObjects);
@@ -568,8 +571,7 @@ function Alert(message) {
 
 displayListOfStakeHoldersObjects();
 
-//   document.getElementById('stakeholder-object').innerHTML = loopTable;
-
+// looping and displaying table data of stake holders
 function loopTable(array) {
   let role = ["Board", "Teacher", "Student", "Chairman"];
   document.getElementById("stakeholder-list").innerHTML = array
