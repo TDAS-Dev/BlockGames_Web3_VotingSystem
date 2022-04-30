@@ -390,8 +390,6 @@ async function logOut() {
 }
 
 //TOGGLE THE STATUS BAR FOR VOTING STATUS
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
-//TOGGLE THE STATUS BAR FOR VOTING STATUS
 document.getElementById("btn-voting-open").onclick = votingOpen;
 document.getElementById("btn-voting-close").onclick = votingClose;
 
@@ -467,8 +465,6 @@ async function toggleVoting() {
   return await Moralis.executeFunction(options);
 }
 
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
-//TOGGLE THE STATUS BAR FOR RESULTS STATUS
 //TOGGLE THE STATUS BAR FOR RESULTS STATUS
 document.getElementById("btn-result-open").onclick = resultOpen;
 document.getElementById("btn-result-close").onclick = resultClose;
@@ -579,9 +575,6 @@ async function createCandidate(_name) {
 }
 
 //STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-
 // implementation for keeping state
 function setState(key, params) {
   localStorage.setItem(key, JSON.stringify(params)); //setState
@@ -594,9 +587,6 @@ function getStateData(params) {
 }
 
 //DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-
 document.getElementById("close").onclick = function () {
   document.getElementById("modal").classList.replace("grid", "hidden");
 };
@@ -605,17 +595,11 @@ document.getElementById("closeBtn").onclick = function () {
 };
 
 //DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//@abiola
 if (getStateData("account")) {
   document.getElementById("wallet-address").innerHTML = getStateData("account");
 }
 
 //DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
-
 updateStatusBar();
 
 async function updateStatusBar() {
@@ -680,9 +664,6 @@ async function getListOfStudents() {
 }
 
 //ADD AND CREATE STAKEHOLDERS
-//ADD AND CREATE STAKEHOLDERS
-//ADD AND CREATE STAKEHOLDERS
-
 document.getElementById("btn-addStakeholder").onclick = addStakeholder;
 
 async function addStakeholder() {
@@ -710,13 +691,6 @@ async function createStakeHolder(address, role) {
 }
 
 //ADD AND CREATE MULTIPLE STAKEHOLDERS
-//ADD AND CREATE MULTIPLE STAKEHOLDERS
-//ADD AND CREATE MULTIPLE STAKEHOLDERS
-//function not properly functioning just yet
-// -----------------------------------------------------------------
-// document.getElementById("btn-multipleaddStakeholder").onclick =
-//   addMultipleStakeholder;
-
 async function addMultipleStakeholder() {
   // const addressesArray = document.getElementById("input-address").value;
   const addressesArray = getStateData("uploadAddress");
@@ -747,7 +721,6 @@ async function createMultipleStakeHolders(addresses, role) {
 // FUNCTIONALITY FOR UPLOADING EXCEL FILE
 // CONVERTING TO JSON
 // SETTING THE
-
 // select file
 let selectedFile;
 console.log(window.XLSX);

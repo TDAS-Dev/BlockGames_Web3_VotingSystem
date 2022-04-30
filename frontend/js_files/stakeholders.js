@@ -395,9 +395,6 @@ async function logOut() {
 
 
 //STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-//STATE MANAGEMENT FUNCTIONS
-
 // implementation for keeping state
 function setState(key, params) {
   localStorage.setItem(key, JSON.stringify(params)); //setState
@@ -410,9 +407,6 @@ function getStateData(params) {
 }
 
 //DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-
 document.getElementById("close").onclick = function () {
   document.getElementById("modal").classList.replace("grid", "hidden");
 };
@@ -421,15 +415,11 @@ document.getElementById("closeBtn").onclick = function () {
 };
 
 //DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//@abiola
 if (getStateData("account")) {
   document.getElementById("wallet-address").innerHTML = getStateData("account");
 }
 
 //DISPLAY AND UPDATE STATUS BAR
-
 updateStatusBar();
 async function updateStatusBar() {
   const candidatesArray = await getListOfCandidates();

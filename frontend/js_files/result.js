@@ -453,9 +453,6 @@ function getStateData(params) {
 }
 
 //DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-//DISPLAY MODAL CLOSING MODAL ON SCREEN
-
 document.getElementById("close").onclick = function () {
   document.getElementById("modal").classList.replace("grid", "hidden");
 };
@@ -464,17 +461,11 @@ document.getElementById("closeBtn").onclick = function () {
 };
 
 //DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//DISPLAY ADDRES STATE EVEN ON RELOAD
-//@abiola
 if (getStateData("account")) {
   document.getElementById("wallet-address").innerHTML = getStateData("account");
 }
 
 //DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
-//DISPLAY AND UPDATE STATUS BAR
-
 updateStatusBar();
 
 async function updateStatusBar() {
@@ -537,10 +528,6 @@ async function getListOfStudents() {
   };
   return await Moralis.Web3API.native.runContractFunction(options);
 }
-
-//DISPLAY THE CANDIDATES ON THE SCREEN
-//DISPLAY THE CANDIDATES ON THE SCREEN
-//DISPLAY THE CANDIDATES ON THE SCREEN
 
 //NOTE DISPLAY JUST CANDIDATE NAME, CANDIDATE ID AND A FAKE IMAGE
 displayCandidatesOnScreen();
