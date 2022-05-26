@@ -1,6 +1,8 @@
 //initialize Moralis on RRRinkeby
-const serverUrl = "https://mrhyy1if02wl.usemoralis.com:2053/server";
-const appId = "AuH19PpSEOGZ1g2U08nV6tnNvgTkDMzaS8VqvjyI";
+// const serverUrl = "https://mrhyy1if02wl.usemoralis.com:2053/server";
+const serverUrl = "https://ujwb1som3llq.usemoralis.com:2053/server";
+// const appId = "AuH19PpSEOGZ1g2U08nV6tnNvgTkDMzaS8VqvjyI";
+const appId = "TPzse1a4T6YsxrbB5Em4weILu5cR0AUplKU43QsZ";
 Moralis.start({ serverUrl, appId });
 
 const CHAIN = "rinkeby";
